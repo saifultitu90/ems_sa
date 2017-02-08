@@ -4,11 +4,11 @@
 $lang['MSG_USERNAME_PASSWORD_INVALID'] = 'Username and Password did not match or Invalid';
 $lang['MSG_LOGIN_SUCCESS'] = 'Successfully Logged In';
 $lang['MSG_LOGOUT_SUCCESS'] = 'Successfully Logged out';
-$lang['MSG_NOT_ASSIGNED_GROUP'] = 'Please Contact with Admin(09666775544.Ext.901) to assign some task.';
-$lang['MSG_LOCATION_INVALID'] = 'Your assigned Location is invalid.Please contact with admin(09666775544.Ext.901).';
-$lang['MSG_LOCATION_NOT_ASSIGNED'] = 'No Location assigned for you.Please contact with admin(09666775544.Ext.901).';
-$lang['MSG_SITE_OFFLINE'] = 'Site is Currently Offline.Please contact with admin(09666775544.Ext.901).';
-$lang['MSG_PRICE_NOT_SET'] = 'Variety Price Not set.Please contact with admin(09666775544.Ext.901).';
+$lang['MSG_NOT_ASSIGNED_GROUP'] = 'Please Contact with Admin(01777709208) to assign some task.';
+$lang['MSG_LOCATION_INVALID'] = 'Your assigned Location is invalid.Please contact with admin(01777709208).';
+$lang['MSG_LOCATION_NOT_ASSIGNED'] = 'No Location assigned for you.Please contact with admin(01777709208).';
+$lang['MSG_SITE_OFFLINE'] = 'Site is Currently Offline.Please contact with admin(01777709208).';
+$lang['MSG_PRICE_NOT_SET'] = 'Variety Price Not set.Please contact with admin(01777709208).';
 
 //Action buttons
 $lang['ACTION_DASHBOARD'] = 'Dashboard';
@@ -28,6 +28,9 @@ $lang['ACTION_PRINT'] = 'Print';
 $lang['ACTION_CSV'] = 'Download as CSV';
 $lang['ACTION_APPROVE_REJECT'] = 'Approve/Reject';
 $lang['ACTION_REPORT'] = 'View Report';
+$lang['ACTION_FORWARD'] = 'Forward';
+$lang['ACTION_MEETING_COMPLETE'] = 'Meeting Complete';
+$lang['ACTION_COLLECTION_APPROVE'] = 'Approve Collection';
 $lang['LABEL_ACTION'] = 'Action';
 
 //****MODULE TASK//
@@ -233,4 +236,18 @@ $lang['LABEL_DAY'] = 'Day';
 $lang['LABEL_SHIFT'] = 'Shift';
 $lang['LABEL_LOCATIONS'] = 'Locations';
 $lang['LABEL_ACCOUNT_TYPE'] = 'Account Type';
-$lang['LABEL_BAR_CODE'] = 'Bar Code';
+$lang['LABEL_CATEGORY'] = 'Category';
+$lang['LABEL_PIC_URL'] = 'Pic url';
+/** Label for meeting minutes/Agenda **/
+/** Created By Saiful **/
+$lang['LABEL_PURPOSE'] = 'Purpose';
+$lang['LABEL_DATE_AGENDA'] = 'Agenda Date';
+$lang['LABEL_TOTAL_BUDGET'] = 'Total Budget';
+$lang['LABEL_LAST_TARGET'] = 'Last Target';
+$lang['LABEL_LAST_ACHIEVEMENT'] = 'Last Achievement';
+$lang['LABEL_TOTAL_ACHIEVEMENT'] = 'Total Achievement';
+$lang['LABEL_NEXT_MONTH_TARGET'] = 'Next Month Target';
+$lang['LABEL_REMARKS_BM'] = 'Remarks Before Meeting';
+$lang['LABEL_REMARKS_IM'] = 'Remarks IN Meeting';
+$lang['MSG_MEETING_COMPLETE_ERR'] = 'Meeting Already Completed!! You Can Not Edit It';
+$lang['MSG_MEETING_COMPLETE'] = 'Meeting Completed Successfuly';

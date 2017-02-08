@@ -109,3 +109,31 @@ $config['table_tm_rnd_demo_disease_picture'] = 'ems_tm_rnd_demo_disease_picture'
 
 $config['table_tm_ict_monitoring_ti'] = 'ems_tm_ict_monitoring_ti';
 $config['table_tm_ict_monitoring_zi'] = 'ems_tm_ict_monitoring_zi';
+// saiful
+// meeting minutes
+
+$config['table_mm_agenda_sales_hom'] = 'ems_mm_agenda_sales_hom';
+$config['table_mm_agenda_sales_di'] = 'ems_mm_agenda_sales_di';
+$config['table_mm_hom_sales_target_bm'] = 'ems_mm_hom_sales_target_bm';
+$config['table_mm_hom_sales_target_im'] = 'ems_mm_hom_sales_target_im';
+$config['table_mm_agenda_collection_hom'] = 'ems_mm_agenda_collection_hom';
+$config['table_mm_hom_collection_target_bm'] = 'ems_mm_hom_collection_target_bm';
+$config['table_mm_hom_collection_target_im'] = 'ems_mm_hom_collection_target_im';
+$config['table_mm_di_sales_target_bm'] = 'ems_mm_di_sales_target_bm';
+$config['table_mm_di_sales_target_im'] = 'ems_mm_di_sales_target_im';
+$config['table_mm_agenda_collection_di'] = 'ems_mm_agenda_collection_di';
+$config['table_mm_di_collection_target_bm'] = 'ems_mm_di_collection_target_bm';
+$config['table_mm_di_collection_target_im'] = 'ems_mm_di_collection_target_im';
+$config['table_mm_agenda_sales_zi'] = 'ems_mm_agenda_sales_zi';
+$config['table_mm_zi_sales_target_bm'] = 'ems_mm_zi_sales_target_bm';
+$config['table_mm_zi_sales_target_im'] = 'ems_mm_zi_sales_target_im';
+$config['table_mm_agenda_collection_zi'] = 'ems_mm_agenda_collection_zi';
+$config['table_mm_zi_collection_target_bm'] = 'ems_mm_zi_collection_target_bm';
+$config['table_mm_zi_collection_target_im'] = 'ems_mm_zi_collection_target_im';
+$config['table_mm_ti_sales_target_bm'] = 'ems_mm_ti_sales_target_bm';
+$config['table_mm_zi_collection_target_bm'] = 'ems_mm_zi_collection_target_bm';
+$config['table_mm_ti_collection_target_bm'] = 'ems_mm_ti_collection_target_bm';
+$config['table_mm_sales_target_approval'] = 'ems_mm_sales_target_approval';
+$config['table_mm_collection_target_approval'] = 'ems_mm_collection_target_approval';
+$config['table_mm_di_meeting_status'] = 'ems_mm_di_meeting_status';
+$config['table_mm_zi_meeting_status'] = 'ems_mm_zi_meeting_status';
