@@ -54,4 +54,7 @@ $config['system_host_type_special']='special';
 $config['system_bank_type_receive']='Receive';
 $config['system_bank_type_expense']='Expense';
 
+// meeting minutes
+$config['system_status_hom_approval_approved']='Approved';
+$config['system_status_forwarded_to_di']='Forwarded';
 

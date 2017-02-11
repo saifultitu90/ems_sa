@@ -119,8 +119,6 @@ class Sales_po_delivery extends Root_Controller
             $this->db->where('spd.sales_po_id',$data['po']['id']);
             $this->db->where('spd.revision',1);
             $data['po_varieties']=$this->db->get()->result_array();
-
-
             $data['customer_varieties_quantity']=array();
             foreach($data['po_varieties'] as $variety)
             {

@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 //those tables from login site
 $config['table_setup_user'] = 'setup_user';
 $config['table_setup_user_info'] = 'setup_user_info';
@@ -8,11 +7,9 @@ $config['table_setup_users_other_sites'] = 'setup_users_other_sites';
 $config['table_system_other_sites'] = 'system_other_sites';
 $config['table_other_sites_visit'] = 'other_sites_visit';
 $config['table_setup_designation'] = 'setup_designation';
-
 //ems site
 $config['table_system_assigned_group'] = 'ems_system_assigned_group';
 $config['table_system_assigned_area'] = 'ems_system_assigned_area';
-
 $config['table_system_user_group'] = 'ems_system_user_group';
 $config['table_system_task'] = 'ems_system_task';
 $config['table_system_user_group_role'] = 'ems_system_user_group_role';
@@ -60,7 +57,6 @@ $config['table_payment_payment'] = 'ems_payment_payment';
 //po
 $config['table_sales_po'] = 'ems_sales_po';
 $config['table_sales_po_details'] = 'ems_sales_po_details';
-
 //stock out
 $config['table_stockout'] = 'ems_stockout';
 //delivery
@@ -73,7 +69,6 @@ $config['table_survey_primary_customers'] = 'ems_survey_primary_customers';
 $config['table_survey_primary_customer_survey'] = 'ems_survey_primary_customer_survey';
 $config['table_survey_primary_quantity_survey'] = 'ems_survey_primary_quantity_survey';
 $config['table_survey_product'] = 'ems_survey_product';
-
 //tm setup
 $config['table_setup_tm_seasons'] = 'ems_setup_tm_seasons';
 $config['table_setup_tm_shifts'] = 'ems_setup_tm_shifts';
@@ -86,7 +81,6 @@ $config['table_setup_tm_market_visit_trainer'] = 'ems_setup_tm_market_visit_trai
 //task management
 $config['table_tm_farmers'] = 'ems_tm_farmers';
 $config['table_tm_farmer_varieties'] = 'ems_tm_farmer_varieties';
-
 $config['table_tm_visits_picture'] = 'ems_tm_visits_picture';
 $config['table_tm_visits_fruit_picture'] = 'ems_tm_visits_fruit_picture';
 $config['table_tm_visits_disease_picture'] = 'ems_tm_visits_disease_picture';
@@ -100,40 +94,30 @@ $config['table_tm_market_visit_di'] = 'ems_tm_market_visit_di';
 $config['table_tm_market_visit_solution_di'] = 'ems_tm_market_visit_solution_di';
 $config['table_tm_market_visit_trainer'] = 'ems_tm_market_visit_trainer';
 $config['table_tm_market_visit_solution_trainer'] = 'ems_tm_market_visit_solution_trainer';
-
 $config['table_tm_rnd_demo_setup'] = 'ems_tm_rnd_demo_setup';
 $config['table_tm_rnd_demo_varieties'] = 'ems_tm_rnd_demo_varieties';
 $config['table_tm_rnd_demo_picture'] = 'ems_tm_rnd_demo_picture';
 $config['table_tm_rnd_demo_fruit_picture'] = 'ems_tm_rnd_demo_fruit_picture';
 $config['table_tm_rnd_demo_disease_picture'] = 'ems_tm_rnd_demo_disease_picture';
-
 $config['table_tm_ict_monitoring_ti'] = 'ems_tm_ict_monitoring_ti';
 $config['table_tm_ict_monitoring_zi'] = 'ems_tm_ict_monitoring_zi';
-// saiful
-// meeting minutes
-
+$config['table_fms_file_category'] = 'fms_file_category';
+$config['table_fms_file_upload'] = 'fms_file_upload';
+$config['table_fms_multiple'] = 'ems_fms_multiple';
+$config['table_fms_multiple_details'] = 'ems_fms_multiple_details';
 $config['table_mm_agenda_sales_hom'] = 'ems_mm_agenda_sales_hom';
-$config['table_mm_agenda_sales_di'] = 'ems_mm_agenda_sales_di';
 $config['table_mm_hom_sales_target_bm'] = 'ems_mm_hom_sales_target_bm';
-$config['table_mm_hom_sales_target_im'] = 'ems_mm_hom_sales_target_im';
-$config['table_mm_agenda_collection_hom'] = 'ems_mm_agenda_collection_hom';
 $config['table_mm_hom_collection_target_bm'] = 'ems_mm_hom_collection_target_bm';
-$config['table_mm_hom_collection_target_im'] = 'ems_mm_hom_collection_target_im';
-$config['table_mm_di_sales_target_bm'] = 'ems_mm_di_sales_target_bm';
-$config['table_mm_di_sales_target_im'] = 'ems_mm_di_sales_target_im';
-$config['table_mm_agenda_collection_di'] = 'ems_mm_agenda_collection_di';
-$config['table_mm_di_collection_target_bm'] = 'ems_mm_di_collection_target_bm';
-$config['table_mm_di_collection_target_im'] = 'ems_mm_di_collection_target_im';
-$config['table_mm_agenda_sales_zi'] = 'ems_mm_agenda_sales_zi';
-$config['table_mm_zi_sales_target_bm'] = 'ems_mm_zi_sales_target_bm';
-$config['table_mm_zi_sales_target_im'] = 'ems_mm_zi_sales_target_im';
-$config['table_mm_agenda_collection_zi'] = 'ems_mm_agenda_collection_zi';
-$config['table_mm_zi_collection_target_bm'] = 'ems_mm_zi_collection_target_bm';
-$config['table_mm_zi_collection_target_im'] = 'ems_mm_zi_collection_target_im';
-$config['table_mm_ti_sales_target_bm'] = 'ems_mm_ti_sales_target_bm';
-$config['table_mm_zi_collection_target_bm'] = 'ems_mm_zi_collection_target_bm';
-$config['table_mm_ti_collection_target_bm'] = 'ems_mm_ti_collection_target_bm';
-$config['table_mm_sales_target_approval'] = 'ems_mm_sales_target_approval';
-$config['table_mm_collection_target_approval'] = 'ems_mm_collection_target_approval';
-$config['table_mm_di_meeting_status'] = 'ems_mm_di_meeting_status';
-$config['table_mm_zi_meeting_status'] = 'ems_mm_zi_meeting_status';
+$config['table_mm_hom_meeting_status'] = 'ems_mm_hom_meeting_status';
+
+
+
+
+
+
+
+
+
+
+
+
