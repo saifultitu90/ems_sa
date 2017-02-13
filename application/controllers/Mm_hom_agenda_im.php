@@ -21,7 +21,7 @@ class Mm_hom_agenda_im extends Root_Controller
             $this->system_list($id);
         }elseif($action=="get_items")
         {
-            $this->get_items($id);
+            $this->get_items();
         }
         elseif($action=="edit")
         {
@@ -33,10 +33,6 @@ class Mm_hom_agenda_im extends Root_Controller
         }elseif($action=="details")
         {
             $this->system_details($id);
-        }
-        elseif($action=="forward")
-        {
-            $this->system_forward($id);
         }elseif($action=="meeting_complete")
         {
             $this->system_meeting_complete($id);
@@ -70,7 +66,7 @@ class Mm_hom_agenda_im extends Root_Controller
 
     }
 
-    private function get_items($id)
+    private function get_items()
     {
         $user = User_helper::get_user();
         if($user->user_group==1)
@@ -277,35 +273,6 @@ class Mm_hom_agenda_im extends Root_Controller
     private function check_validation()
     {
         return true;
-    }
-
-    public function system_forward()
-    {
-        $id=$this->input->post('id');
-        $this->db->trans_start();  //DB Transaction Handle START
-        $data['forwarded_to_di'] =$this->config->item('system_status_forwarded_to_di');
-        $this->db->where('id', $id);
-        $this->db->update($this->config->item('table_mm_agenda_sales_hom'), $data);
-        $this->db->trans_complete();   //DB Transaction Handle END
-        if ($this->db->trans_status() === TRUE)
-        {
-            $save_and_new=$this->input->post('system_save_new_status');
-            $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
-            if($save_and_new==1)
-            {
-                $this->system_add($id);
-            }
-            else
-            {
-                $this->system_list();
-            }
-        }
-        else
-        {
-            $ajax['status']=false;
-            $ajax['desk_message']=$this->lang->line("MSG_SAVED_FAIL");
-            $this->jsonReturn($ajax);
-        }
     }
     private function system_meeting_complete($agenda_id)
     {
