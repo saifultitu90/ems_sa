@@ -21,7 +21,7 @@ class Mm_hom_agenda extends Root_Controller
             $this->system_list($id);
         }elseif($action=="get_items")
         {
-            $this->get_items();
+            $this->system_get_items();
         }
         elseif($action=="add")
         {
@@ -44,7 +44,6 @@ class Mm_hom_agenda extends Root_Controller
             $this->system_list($id);
         }
     }
-
     private function system_list()
     {
         if(isset($this->permissions['view'])&&($this->permissions['view']==1))
@@ -66,8 +65,7 @@ class Mm_hom_agenda extends Root_Controller
             $this->jsonReturn($ajax);
         }
     }
-
-    private function get_items()
+    private function system_get_items()
     {
         $user = User_helper::get_user();
         if($user->user_group==1)
@@ -96,7 +94,6 @@ class Mm_hom_agenda extends Root_Controller
         }
         $this->jsonReturn($items);
     }
-
     private function system_add()
     {
         if(isset($this->permissions['add'])&&($this->permissions['add']==1))
@@ -109,16 +106,15 @@ class Mm_hom_agenda extends Root_Controller
                 'status' => $this->config->item('system_status_active')
             );
             $div_items=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"'));
-            $data['items']=array();
             foreach($div_items as &$item)
             {
                 $s_item['agenda_id']='';
                 $s_item['division_id']=$item['id'];
                 $s_item['division_name']=$item['name'];
                 $s_item['total_budget']='';
-                $s_item['last_target']='';
-                $s_item['last_achievement']='';
                 $s_item['total_achievement']='';
+                $s_item['current_month_target']='';
+                $s_item['current_month_achievement']='';
                 $s_item['next_month_target']='';
                 $s_item['remarks_before_meeting']='';
                 $data['sitems'][]=$s_item;
@@ -129,9 +125,9 @@ class Mm_hom_agenda extends Root_Controller
                 $c_item['division_id']=$item['id'];
                 $c_item['division_name']=$item['name'];
                 $c_item['total_budget']='';
-                $c_item['last_target']='';
-                $c_item['last_achievement']='';
                 $c_item['total_achievement']='';
+                $c_item['current_month_target']='';
+                $c_item['current_month_achievement']='';
                 $c_item['next_month_target']='';
                 $c_item['remarks_before_meeting']='';
                 $data['citems'][]=$c_item;
@@ -153,7 +149,6 @@ class Mm_hom_agenda extends Root_Controller
             $this->jsonReturn($ajax);
         }
     }
-
     private function system_edit($id)
     {
         if(isset($this->permissions['edit'])&&($this->permissions['edit']==1))
@@ -177,19 +172,18 @@ class Mm_hom_agenda extends Root_Controller
             if(!$data['sitems'])
             {
                 $div_items=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"'));
-                $data['items']=array();
                 foreach($div_items as &$item)
                 {
                     $s_item['agenda_id']=$agenda_id;
                     $s_item['division_id']=$item['id'];
                     $s_item['division_name']=$item['name'];
                     $s_item['total_budget']='';
-                    $s_item['last_target']='';
-                    $s_item['last_achievement']='';
                     $s_item['total_achievement']='';
+                    $s_item['current_month_target']='';
+                    $s_item['current_month_achievement']='';
                     $s_item['next_month_target']='';
                     $s_item['remarks_before_meeting']='';
-                    $data['s_items'][]=$s_item;
+                    $data['sitems'][]=$s_item;
                 }
             }
             $this->db->from($this->config->item('table_mm_hom_collection_target_bm').' ct');
@@ -202,19 +196,18 @@ class Mm_hom_agenda extends Root_Controller
             if(!$data['citems'])
             {
                 $div_items=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"'));
-                $data['items']=array();
                 foreach($div_items as &$item)
                 {
-                    $c_item['agenda_id']=1;
+                    $c_item['agenda_id']=$agenda_id;
                     $c_item['division_id']=$item['id'];
                     $c_item['division_name']=$item['name'];
                     $c_item['total_budget']='';
-                    $c_item['last_target']='';
-                    $c_item['last_achievement']='';
                     $c_item['total_achievement']='';
+                    $c_item['current_month_target']='';
+                    $c_item['current_month_achievement']='';
                     $c_item['next_month_target']='';
                     $c_item['remarks_before_meeting']='';
-                    $data['c_items'][]=$c_item;
+                    $data['citems'][]=$c_item;
                 }
             }
             $this->db->from($this->config->item('table_mm_hom_meeting_status'));
@@ -306,9 +299,6 @@ class Mm_hom_agenda extends Root_Controller
                 $data['agenda_id']=$agenda_id;
                 $data['date_created']=$time;
                 $data['user_created'] = $user->user_id;
-                $sdata['division_id']=$division_id;
-                $this->db->where('agenda_id', $data['agenda_id']);
-                $this->db->where('division_id', $sdata['division_id']);
                 Query_helper::add($this->config->item('table_mm_hom_sales_target_bm'),$data);
             }
             if($get_agenda_items)
@@ -324,9 +314,6 @@ class Mm_hom_agenda extends Root_Controller
                 $data['agenda_id']=$agenda_id;
                 $data['date_created']=$time;
                 $data['user_created'] = $user->user_id;
-                $cdata['division_id']=$division_id;
-                $this->db->where('agenda_id', $data['agenda_id']);
-                $this->db->where('division_id', $cdata['division_id']);
                 Query_helper::add($this->config->item('table_mm_hom_collection_target_bm'),$data);
             }
             $this->db->trans_complete();   //DB Transaction Handle END
@@ -356,7 +343,6 @@ class Mm_hom_agenda extends Root_Controller
         $this->load->library('form_validation');
         $this->form_validation->set_rules('item[date_hom_agenda]',$this->lang->line('LABEL_DATE_AGENDA'),'required');
         $this->form_validation->set_rules('item[purpose]',$this->lang->line('LABEL_PURPOSE'),'required');
-
         if($this->form_validation->run() == FALSE)
         {
             $this->message=validation_errors();
@@ -364,7 +350,6 @@ class Mm_hom_agenda extends Root_Controller
         }
         return true;
     }
-
     public function system_forward()
     {
         $id=$this->input->post('id');
@@ -375,16 +360,8 @@ class Mm_hom_agenda extends Root_Controller
         $this->db->trans_complete();   //DB Transaction Handle END
         if ($this->db->trans_status() === TRUE)
         {
-            $save_and_new=$this->input->post('system_save_new_status');
-            $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
-            if($save_and_new==1)
-            {
-                $this->system_add($id);
-            }
-            else
-            {
-                $this->system_list();
-            }
+            $this->message=$this->lang->line("AGENDA_FORWARDED");
+            $this->system_list();
         }
         else
         {

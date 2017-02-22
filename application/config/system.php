@@ -1,7 +1,6 @@
 <?php
 $config['system_site_short_name']='ems';
 $config['offline_controllers']=array('home','sys_site_offline');
-
 $config['system_status_yes']='Yes';
 $config['system_status_no']='No';
 $config['system_status_active']='Active';
@@ -10,19 +9,15 @@ $config['system_status_delete']='Deleted';
 $config['system_status_pending']='Pending';
 $config['system_status_approved']='Approved';
 $config['system_status_rejected']='Rejected';
-
 $config['system_status_not_done']='Not Done';
 $config['system_status_done']='Done';
-
 $config['system_edit_not_exists']='Edit Not Exists';
 $config['system_edit_others']='Edit Others';
 $config['system_view_not_exists']='View Not Exists';
 $config['system_view_others']='View Others';
 $config['system_save']='save';
-
 //$config['system_payment_initial']='Initial';
 //$config['system_payment_other']='Other';
-
 $config['system_payment_way_cash']='Cash';
 $config['system_payment_way_pay_order']='Pay Order';
 $config['system_payment_way_cheque']='Cheque';
@@ -46,15 +41,11 @@ $config['system_purpose_rnd']='RND';
 $config['system_purpose_customer']='Customer';
 //market survey
 $config['system_msurvey_customers_num']=2;
-
 $config['system_host_type_customer']='customer';
 $config['system_host_type_other_customer']='other_customer';
 $config['system_host_type_special']='special';
-
 $config['system_bank_type_receive']='Receive';
 $config['system_bank_type_expense']='Expense';
-
 // meeting minutes
 $config['system_status_hom_approval_approved']='Approved';
 $config['system_status_forwarded_to_di']='Forwarded';
-

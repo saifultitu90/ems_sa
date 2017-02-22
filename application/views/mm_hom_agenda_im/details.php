@@ -66,9 +66,9 @@ $CI->load->view("action_buttons",$action_data);
                                     <tr>
                                         <th>Name</th>
                                         <th>Total Budget</th>
-                                        <th>Last Target</th>
-                                        <th>Last Achievement</th>
                                         <th>Total Achievement</th>
+                                        <th>Current Month Target</th>
+                                        <th>Current Month Achievement</th>
                                         <th>Next Month Target Before Meeting</th>
                                         <th>Next Month Target In Meeting</th>
                                         <th>Remarks Before Meeting</th>
@@ -81,17 +81,11 @@ $CI->load->view("action_buttons",$action_data);
                                             <td><?php echo $s_item['division_name'];?></td>
                                             <input type="hidden" name="sales_division_id[]" value="<?php echo $s_item['division_id'];?>"></td>
                                             <td><?php echo $s_item['total_budget'];?></td>
-                                            <td><?php echo $s_item['last_target'];?></td>
-                                            <td><?php echo $s_item['last_achievement'];?></td>
                                             <td><?php echo $s_item['total_achievement'];?></td>
+                                            <td><?php echo $s_item['current_month_target'];?></td>
+                                            <td><?php echo $s_item['current_month_achievement'];?></td>
                                             <td><?php echo $s_item['next_month_target'];?></td>
                                             <td><?php echo $s_item['next_month_target_im'];?></td>
-
-                                            <!--                                --><?php //foreach($im_next_month_items as $sum_items){?>
-                                            <!--                                <td>-->
-                                            <!--                                    <input type="text" name="sales_next_month_targetim[]" value="--><?php //$counter=count($divs_id); for($i=0; $i<$counter; $i++){if($divs_id[$i]==$s_item['division_id']){echo $sum_items['next_month_target'];}}?><!--">-->
-                                            <!--                                </td>-->
-                                            <!--                                --><?php //} ?>
                                             <td><?php echo $s_item['remarks_before_meeting'];?></td>
                                             <td><?php echo $s_item['remarks_in_meeting'];?></td>
                                         </tr>
@@ -119,9 +113,9 @@ $CI->load->view("action_buttons",$action_data);
                                     <tr>
                                         <th>Name</th>
                                         <th>Total Budget</th>
-                                        <th>Last Target</th>
-                                        <th>Last Achievement</th>
                                         <th>Total Achievement</th>
+                                        <th>Current Month Target</th>
+                                        <th>Current Month Achievement</th>
                                         <th>Next Month Target Before Meeting</th>
                                         <th>Next Month Target In Meeting</th>
                                         <th>Remarks Before Meeting</th>
@@ -134,9 +128,9 @@ $CI->load->view("action_buttons",$action_data);
                                             <td><?php echo $c_item['division_name'];?></td>
                                             <input type="hidden" name="collection_division_id[]" value="<?php echo $c_item['division_id'];?>">
                                             <td><?php echo $c_item['total_budget'];?></td>
-                                            <td><?php echo $c_item['last_target'];?></td>
-                                            <td><?php echo $c_item['last_achievement'];?></td>
                                             <td><?php echo $c_item['total_achievement'];?></td>
+                                            <td><?php echo $c_item['current_month_target'];?></td>
+                                            <td><?php echo $c_item['current_month_achievement'];?></td>
                                             <td><?php echo $c_item['next_month_target'];?></td>
                                             <td><?php echo $c_item['next_month_target_im'];?></td>
                                             <td><?php echo $c_item['remarks_before_meeting'];?></td>

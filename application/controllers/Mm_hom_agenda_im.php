@@ -21,7 +21,7 @@ class Mm_hom_agenda_im extends Root_Controller
             $this->system_list($id);
         }elseif($action=="get_items")
         {
-            $this->get_items();
+            $this->system_get_items();
         }
         elseif($action=="edit")
         {
@@ -42,7 +42,6 @@ class Mm_hom_agenda_im extends Root_Controller
             $this->system_list($id);
         }
     }
-
     private function system_list()
     {
         if(isset($this->permissions['view'])&&($this->permissions['view']==1))
@@ -65,8 +64,7 @@ class Mm_hom_agenda_im extends Root_Controller
         }
 
     }
-
-    private function get_items()
+    private function system_get_items()
     {
         $user = User_helper::get_user();
         if($user->user_group==1)
@@ -95,7 +93,6 @@ class Mm_hom_agenda_im extends Root_Controller
         }
         $this->jsonReturn($items);
     }
-
     private function system_edit($id)
     {
         if(isset($this->permissions['edit'])&&($this->permissions['edit']==1))
@@ -126,13 +123,12 @@ class Mm_hom_agenda_im extends Root_Controller
                     $s_item['division_id']=$item['id'];
                     $s_item['division_name']=$item['name'];
                     $s_item['total_budget']='';
-                    $s_item['last_target']='';
-                    $s_item['last_achievement']='';
                     $s_item['total_achievement']='';
+                    $s_item['current_month_target']='';
+                    $s_item['current_month_achievement']='';
                     $s_item['next_month_target']='';
                     $s_item['remarks_before_meeting']='';
-                    $s_item['remarks_in_meeting']='';
-                    $data['s_items'][]=$s_item;
+                    $data['sitems'][]=$s_item;
                 }
             }
             $this->db->from($this->config->item('table_mm_hom_collection_target_bm').' ct');
@@ -148,17 +144,16 @@ class Mm_hom_agenda_im extends Root_Controller
                 $data['items']=array();
                 foreach($div_items as &$item)
                 {
-                    $c_item['agenda_id']=1;
+                    $c_item['agenda_id']=$agenda_id;
                     $c_item['division_id']=$item['id'];
                     $c_item['division_name']=$item['name'];
                     $c_item['total_budget']='';
-                    $c_item['last_target']='';
-                    $c_item['last_achievement']='';
                     $c_item['total_achievement']='';
+                    $c_item['current_month_target']='';
+                    $c_item['current_month_achievement']='';
                     $c_item['next_month_target']='';
                     $c_item['remarks_before_meeting']='';
-                    $c_item['remarks_in_meeting']='';
-                    $data['c_items'][]=$c_item;
+                    $data['citems'][]=$c_item;
                 }
             }
 //            $data['c_items']=Query_helper::get_info($this->config->item('table_mm_hom_collection_target_bm'),'*',array('agenda_id ='.$group_id));
@@ -185,7 +180,6 @@ class Mm_hom_agenda_im extends Root_Controller
             $this->jsonReturn($ajax);
         }
     }
-
     private function system_save()
     {
         $id = $this->input->post("id");
@@ -251,16 +245,9 @@ class Mm_hom_agenda_im extends Root_Controller
             $this->db->trans_complete();   //DB Transaction Handle END
             if ($this->db->trans_status() === TRUE)
             {
-                $save_and_new=$this->input->post('system_save_new_status');
                 $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
-                if($save_and_new==1)
-                {
-                    $this->system_add($id);
-                }
-                else
-                {
-                    $this->system_list();
-                }
+                $this->system_list();
+
             }
             else
             {
@@ -298,16 +285,8 @@ class Mm_hom_agenda_im extends Root_Controller
         $this->db->trans_complete();   //DB Transaction Handle END
         if ($this->db->trans_status() === TRUE)
         {
-            $save_and_new=$this->input->post('system_save_new_status');
-            if($save_and_new==1)
-            {
-                $this->system_add($agenda_id);
-            }
-            else
-            {
-                $this->message=$this->lang->line("MSG_MEETING_COMPLETE");
-                $this->system_list();
-            }
+            $this->message=$this->lang->line("MSG_MEETING_COMPLETE");
+            $this->system_list();
         }
         else
         {

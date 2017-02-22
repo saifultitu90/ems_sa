@@ -252,3 +252,4 @@ $lang['LABEL_REMARKS_IM'] = 'Remarks IN Meeting';
 $lang['MSG_MEETING_COMPLETE_ERR'] = 'Meeting Already Completed!! You Can Not Edit It';
 $lang['MSG_MEETING_COMPLETE'] = 'Meeting Completed Successfuly';
 $lang['MSG_MEETING_COMPLETED_ALREADY'] = 'Meeting Already Completed';
+$lang['AGENDA_FORWARDED'] = 'Agenda Forwarded';
