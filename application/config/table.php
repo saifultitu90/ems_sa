@@ -105,32 +105,7 @@ $config['table_fms_file_category'] = 'fms_file_category';
 $config['table_fms_file_upload'] = 'fms_file_upload';
 $config['table_fms_multiple'] = 'ems_fms_multiple';
 $config['table_fms_multiple_details'] = 'ems_fms_multiple_details';
-$config['table_mm_agenda_sales_hom'] = 'ems_mm_agenda_sales_hom';
-$config['table_mm_agenda_sales_di'] = 'ems_mm_agenda_sales_di';
-$config['table_mm_hom_sales_target_bm'] = 'ems_mm_hom_sales_target_bm';
-$config['table_mm_hom_sales_target_im'] = 'ems_mm_hom_sales_target_im';
-$config['table_mm_agenda_collection_hom'] = 'ems_mm_agenda_collection_hom';
-$config['table_mm_hom_collection_target_bm'] = 'ems_mm_hom_collection_target_bm';
-$config['table_mm_hom_collection_target_im'] = 'ems_mm_hom_collection_target_im';
-$config['table_mm_di_sales_target_bm'] = 'ems_mm_di_sales_target_bm';
-$config['table_mm_di_sales_target_im'] = 'ems_mm_di_sales_target_im';
-$config['table_mm_agenda_collection_di'] = 'ems_mm_agenda_collection_di';
-$config['table_mm_di_collection_target_bm'] = 'ems_mm_di_collection_target_bm';
-$config['table_mm_di_collection_target_im'] = 'ems_mm_di_collection_target_im';
-$config['table_mm_agenda_sales_zi'] = 'ems_mm_agenda_sales_zi';
-$config['table_mm_zi_sales_target_bm'] = 'ems_mm_zi_sales_target_bm';
-$config['table_mm_zi_sales_target_im'] = 'ems_mm_zi_sales_target_im';
-$config['table_mm_agenda_collection_zi'] = 'ems_mm_agenda_collection_zi';
-$config['table_mm_zi_collection_target_bm'] = 'ems_mm_zi_collection_target_bm';
-$config['table_mm_zi_collection_target_im'] = 'ems_mm_zi_collection_target_im';
-$config['table_mm_ti_sales_target_bm'] = 'ems_mm_ti_sales_target_bm';
-$config['table_mm_ti_collection_target_bm'] = 'ems_mm_ti_collection_target_bm';
-$config['table_mm_sales_target_approval'] = 'ems_mm_sales_target_approval';
-$config['table_mm_collection_target_approval'] = 'ems_mm_collection_target_approval';
-$config['table_mm_di_meeting_status'] = 'ems_mm_di_meeting_status';
-$config['table_mm_zi_meeting_status'] = 'ems_mm_zi_meeting_status';
-$config['table_mm_hom_meeting_status'] = 'ems_mm_hom_meeting_status';
-$config['table_mm_di_meeting_forward'] = 'ems_mm_di_forward_status';
+$config['table_mm_agenda_hom'] = 'ems_mm_agenda_hom';
 
 
 
