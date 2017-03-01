@@ -29,8 +29,6 @@ $lang['ACTION_CSV'] = 'Download as CSV';
 $lang['ACTION_APPROVE_REJECT'] = 'Approve/Reject';
 $lang['ACTION_REPORT'] = 'View Report';
 $lang['ACTION_FORWARD'] = 'Forward';
-$lang['ACTION_MEETING_COMPLETE'] = 'Meeting Complete';
-$lang['ACTION_COLLECTION_APPROVE'] = 'Approve Collection';
 $lang['LABEL_ACTION'] = 'Action';
 
 //****MODULE TASK//
@@ -249,7 +247,7 @@ $lang['LABEL_TOTAL_ACHIEVEMENT'] = 'Total Achievement';
 $lang['LABEL_NEXT_MONTH_TARGET'] = 'Next Month Target';
 $lang['LABEL_REMARKS_BM'] = 'Remarks Before Meeting';
 $lang['LABEL_REMARKS_IM'] = 'Remarks IN Meeting';
+$lang['LABEL_MEETING_COMPLETE'] = 'Complete';
 $lang['MSG_MEETING_COMPLETE_ERR'] = 'Meeting Already Completed!! You Can Not Edit It';
 $lang['MSG_MEETING_COMPLETE'] = 'Meeting Completed Successfuly';
 $lang['MSG_MEETING_COMPLETED_ALREADY'] = 'Meeting Already Completed';
-$lang['AGENDA_FORWARDED'] = 'Agenda Forwarded';

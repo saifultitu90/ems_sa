@@ -43,7 +43,7 @@ $CI->load->view("action_buttons",$action_data);
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'purpose', type: 'string' },
-                { name: 'date_hom_agenda', type: 'string' },
+                { name: 'date', type: 'string' },
                 { name: 'status', type: 'string' }
             ],
             id: 'id',
@@ -68,7 +68,7 @@ $CI->load->view("action_buttons",$action_data);
                 autoheight: true,
                 columns: [
                     { text: '<?php echo $CI->lang->line('LABEL_PURPOSE'); ?>', dataField: 'purpose'},
-                    { text: '<?php echo $CI->lang->line('LABEL_DATE_AGENDA'); ?>', dataField: 'date_hom_agenda'},
+                    { text: '<?php echo $CI->lang->line('LABEL_DATE_AGENDA'); ?>', dataField: 'date'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status',filtertype: 'list',width:'150',cellsalign: 'right'}
                 ]
             });

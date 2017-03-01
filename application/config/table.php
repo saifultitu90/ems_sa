@@ -106,6 +106,8 @@ $config['table_fms_file_upload'] = 'fms_file_upload';
 $config['table_fms_multiple'] = 'ems_fms_multiple';
 $config['table_fms_multiple_details'] = 'ems_fms_multiple_details';
 $config['table_mm_agenda_hom'] = 'ems_mm_agenda_hom';
+$config['table_mm_agenda_hom_sales'] = 'ems_mm_agenda_hom_sales';
+$config['table_mm_agenda_hom_collection'] = 'ems_mm_agenda_hom_collection';
 
 
 

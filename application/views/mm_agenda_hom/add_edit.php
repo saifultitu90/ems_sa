@@ -40,7 +40,9 @@ $CI->load->view("action_buttons",$action_data);
                                 <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_PURPOSE');?><span style="color:#FF0000">*</span></label>
                             </div>
                             <div class="col-sm-4 col-xs-8">
-                                <input type="text" name="item[purpose]" id="name" class="form-control" value="<?php echo $item['purpose'];?>"/>
+                                <textarea class="form-control" name="item[purpose]"><?php echo $item['purpose'];?></textarea>
+
+<!--                                <input type="text" name="item[purpose]" id="name" class="form-control" value="--><?php //echo $item['purpose'];?><!--"/>-->
                             </div>
                         </div>
                 </div>
@@ -54,8 +56,5 @@ $CI->load->view("action_buttons",$action_data);
     {
         turn_off_triggers();
         $(".datepicker").datepicker({dateFormat : display_date_format});
-        $(".dob").datepicker({dateFormat : display_date_format,changeMonth: true,changeYear: true,yearRange: "-100:+0"});
-        $(":file").filestyle({input: false,buttonText: "<?php echo $CI->lang->line('UPLOAD');?>", buttonName: "btn-danger"});
-
     });
 </script>
