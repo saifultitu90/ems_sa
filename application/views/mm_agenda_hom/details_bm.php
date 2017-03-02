@@ -72,12 +72,12 @@ $CI->load->view("action_buttons",$action_data);
                                         <tr>
                                                 <td><?php echo $sales_item['division_name'];?></td>
                                                 <input type="hidden" name="sales_items[<?php echo $sales_item['id_division']?>][id_division]" value="<?php echo $sales_item['id_division'];?>"></td>
-                                                <td><input type="text" name="sales_items[<?php echo $sales_item['id_division']?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
-                                                <td><input type="text" name="sales_items[<?php echo $sales_item['id_division']?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
-                                                <td><input type="text" name="sales_items[<?php echo $sales_item['id_division']?>][target_current_month]" value="<?php echo $sales_item['target_current_month'];?>"></td>
-                                                <td><input type="text" name="sales_items[<?php echo $sales_item['id_division']?>][achievement_current_month]" value="<?php echo $sales_item['achievement_current_month'];?>"></td>
-                                                <td><input type="text" name="sales_items[<?php echo $sales_item['id_division']?>][target_next_month]" value="<?php echo $sales_item['target_next_month'];?>"></td>
-                                                <td><input type="text" name="sales_items[<?php echo $sales_item['id_division']?>][remarks_before_meeting]" value="<?php echo $sales_item['remarks_before_meeting'];?>"></td>
+                                                <td><input class="form-control" type="text" name="sales_items[<?php echo $sales_item['id_division']?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
+                                                <td><input class="form-control" type="text" name="sales_items[<?php echo $sales_item['id_division']?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
+                                                <td><input class="form-control" type="text" name="sales_items[<?php echo $sales_item['id_division']?>][target_current_month]" value="<?php echo $sales_item['target_current_month'];?>"></td>
+                                                <td><input class="form-control" type="text" name="sales_items[<?php echo $sales_item['id_division']?>][achievement_current_month]" value="<?php echo $sales_item['achievement_current_month'];?>"></td>
+                                                <td><input class="form-control" type="text" name="sales_items[<?php echo $sales_item['id_division']?>][target_next_month]" value="<?php echo $sales_item['target_next_month'];?>"></td>
+                                                <td><textarea class="form-control" name="sales_items[<?php echo $sales_item['id_division']?>][remarks_before_meeting]"><?php echo $sales_item['remarks_before_meeting'];?></textarea></td>
                                         </tr>
                                         </tbody>
                                     <?php } ?>
@@ -115,12 +115,12 @@ $CI->load->view("action_buttons",$action_data);
                                         <tr>
                                                 <td><?php echo $collection_item['division_name'];?></td>
                                                 <input type="hidden" name="collection_items[<?php echo $collection_item['id_division'];?>][id_division]" value="<?php echo $collection_item['id_division'];?>">
-                                                <td><input type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>"></td>
-                                                <td><input type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
-                                                <td><input type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][target_current_month]" value="<?php echo $collection_item['target_current_month'];?>"></td>
-                                                <td><input type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][achievement_current_month]" value="<?php echo $collection_item['achievement_current_month'];?>"></td>
-                                                <td><input type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][target_next_month]" value="<?php echo $collection_item['target_next_month'];?>"></td>
-                                                <td><input type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][remarks_before_meeting]" value="<?php echo $collection_item['remarks_before_meeting'];?>"></td>
+                                                <td><input class="form-control" type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>"></td>
+                                                <td><input class="form-control" type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
+                                                <td><input class="form-control" type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][target_current_month]" value="<?php echo $collection_item['target_current_month'];?>"></td>
+                                                <td><input class="form-control" type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][achievement_current_month]" value="<?php echo $collection_item['achievement_current_month'];?>"></td>
+                                                <td><input class="form-control" type="text" name="collection_items[<?php echo $collection_item['id_division'];?>][target_next_month]" value="<?php echo $collection_item['target_next_month'];?>"></td>
+                                                <td><textarea class="form-control" name="collection_items[<?php echo $collection_item['id_division'];?>][remarks_before_meeting]"><?php echo $collection_item['remarks_before_meeting'];?></textarea></td>
                                         </tr>
                                         </tbody>
                                     <?php } ?>
