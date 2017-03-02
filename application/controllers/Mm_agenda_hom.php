@@ -221,7 +221,7 @@ class Mm_agenda_hom extends Root_Controller
             {
                 $div_items=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"'));
                 $data['sales_items']=array();
-                foreach($div_items as &$item)
+                foreach($div_items as $item)
                 {
                     $sales_item['id_agenda']=$id;
                     $sales_item['id_division']=$item['id'];
@@ -251,7 +251,7 @@ class Mm_agenda_hom extends Root_Controller
             {
                 $div_items=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"'));
                 $data['collection_items']=array();
-                foreach($div_items as &$item)
+                foreach($div_items as $item)
                 {
                     $collection_item['id_agenda']=$id;
                     $collection_item['id_division']=$item['id'];
@@ -270,7 +270,6 @@ class Mm_agenda_hom extends Root_Controller
                     $data['collection_items'][]=$collection_item;
                 }
             }
-            $this->db->trans_start();  //DB Transaction Handle START
             $data['agenda_id']=$id;
             $data['title']="Edit Agenda list ";
             $ajax['status']=true;
@@ -326,10 +325,7 @@ class Mm_agenda_hom extends Root_Controller
         }
         $this->db->trans_start();
         $time=time();
-        $this->db->select('*');
-        $this->db->from($this->config->item('table_mm_agenda_hom_sales'));
-        $this->db->where('id_agenda',$id);
-        $items=$this->db->get()->result_array();
+        $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom_sales'),'*',array('id ='.$id));
         if($items)
         {
             $this->db->where('id_agenda',$id);
