@@ -170,6 +170,7 @@ class Mm_agenda_hom extends Root_Controller
         }
         else
         {
+            $this->db->trans_start();  //DB Transaction Handle START
             $data=$this->input->post('item');
             $data['date']=System_helper::get_time($data['date']);
             $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date'),array('id ='.$id,'status ="'.$this->config->item('system_status_active').'"'));
