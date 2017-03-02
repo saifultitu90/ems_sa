@@ -76,7 +76,7 @@ class Mm_agenda_hom extends Root_Controller
     }
     private function system_get_items()
     {
-        $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date'),array('status !="'.$this->config->item('system_status_delete').'"'),0,0,array('id DESC'));
+        $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date','status'),array('status !="'.$this->config->item('system_status_delete').'"'),0,0,array('id DESC'));
         foreach($items as &$item)
         {
             $item['date']=System_helper::display_date($item['date']);
@@ -171,6 +171,7 @@ class Mm_agenda_hom extends Root_Controller
         else
         {
             $data=$this->input->post('item');
+            $data['date']=System_helper::get_time($data['date']);
             $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date'),array('id ='.$id,'status ="'.$this->config->item('system_status_active').'"'));
             if($items)
             {
