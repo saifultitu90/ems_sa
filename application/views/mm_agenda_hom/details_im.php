@@ -73,7 +73,7 @@ $CI->load->view("action_buttons",$action_data);
                                         <tbody>
                                         <tr>
                                             <td><?php echo $sales_item['division_name'];?></td>
-                                            <input type="hidden" name="sales_items[<?php echo $sales_item['id_division']?>][id_division]" value="<?php echo $sales_item['id_division'];?>"></td>
+                                            <input type="hidden" name="sales_items[<?php echo $sales_item['division_id']?>][division_id]" value="<?php echo $sales_item['division_id'];?>"></td>
                                             <td><?php echo $sales_item['budget_total'];?></td>
                                             <td><?php echo $sales_item['achievement_total'];?></td>
                                             <td><?php echo $sales_item['target_current_month'];?></td>
@@ -81,7 +81,7 @@ $CI->load->view("action_buttons",$action_data);
                                             <td><?php echo $sales_item['target_next_month'];?></td>
                                             <td><?php echo $sales_item['target_next_month_im'];?></td>
                                             <td><?php echo $sales_item['remarks_before_meeting'];?></td>
-                                            <td><textarea rows="3" cols="10" class="form-control" name="sales_items[<?php echo $sales_item['id_division']?>][remarks_in_meeting]"><?php echo $sales_item['remarks_in_meeting'];?></textarea></td>
+                                            <td><textarea rows="3" cols="10" class="form-control" name="sales_items[<?php echo $sales_item['division_id']?>][remarks_in_meeting]"><?php echo $sales_item['remarks_in_meeting'];?></textarea></td>
                                         </tr>
                                         </tbody>
                                     <?php } ?>
@@ -120,7 +120,7 @@ $CI->load->view("action_buttons",$action_data);
                                         <tbody>
                                         <tr>
                                             <td><?php echo $collection_item['division_name'];?></td>
-                                            <input type="hidden" name="collection_items[<?php echo $collection_item['id_division'];?>][id_division]" value="<?php echo $collection_item['id_division'];?>">
+                                            <input type="hidden" name="collection_items[<?php echo $collection_item['division_id'];?>][division_id]" value="<?php echo $collection_item['division_id'];?>">
                                             <td><?php echo $collection_item['budget_total'];?></td>
                                             <td><?php echo $collection_item['achievement_total'];?></td>
                                             <td><?php echo $collection_item['target_current_month'];?></td>
@@ -128,7 +128,7 @@ $CI->load->view("action_buttons",$action_data);
                                             <td><?php echo $collection_item['target_next_month'];?></td>
                                             <td><?php echo $collection_item['target_next_month_im'];?></td>
                                             <td><?php echo $collection_item['remarks_before_meeting'];?></td>
-                                            <td><textarea rows="3" cols="20" class="form-control" name="collection_items[<?php echo $collection_item['id_division'];?>][remarks_in_meeting]"><?php echo $collection_item['remarks_in_meeting'];?></textarea></td>
+                                            <td><textarea rows="3" cols="20" class="form-control" name="collection_items[<?php echo $collection_item['division_id'];?>][remarks_in_meeting]"><?php echo $collection_item['remarks_in_meeting'];?></textarea></td>
                                         </tr>
                                         </tbody>
                                     <?php } ?>

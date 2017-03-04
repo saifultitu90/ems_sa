@@ -2,8 +2,11 @@
 $CI = & get_instance();
 $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
-$action_data["action_save"]='#save_form';
-$action_data["action_clear"]='#save_form';
+if(!($item['status_forward']==$this->config->item('system_status_forward')))
+{
+   $action_data["action_save"]='#save_form';
+   $action_data["action_clear"]='#save_form';
+}
 $CI->load->view("action_buttons",$action_data);
 ?>
 <form class="form_valid" id="save_form" action="<?php echo site_url($CI->controller_url.'/index/save');?>" method="post">
@@ -16,7 +19,6 @@ $CI->load->view("action_buttons",$action_data);
             </div>
             <div class="clearfix"></div>
         </div>
-
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -27,6 +29,24 @@ $CI->load->view("action_buttons",$action_data);
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
 
+                    <?php if($item['status_forward']==$this->config->item('system_status_forward')){?>
+                    <div class="row show-grid">
+                        <div class="col-xs-4">
+                            <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_DATE_AGENDA');?></label>
+                        </div>
+                        <div class="col-sm-4 col-xs-8">
+                            <?php echo System_helper::display_date($item['date']);?>
+                        </div>
+                    </div>
+                    <div class="row show-grid">
+                        <div class="col-xs-4">
+                            <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_PURPOSE');?></label>
+                        </div>
+                        <div class="col-sm-4 col-xs-8">
+                            <?php echo $item['purpose'];?>
+                        </div>
+                    </div>
+                    <?php }else{?>
                         <div class="row show-grid">
                             <div class="col-xs-4">
                                 <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_DATE_AGENDA');?><span style="color:#FF0000">*</span></label>
@@ -41,17 +61,15 @@ $CI->load->view("action_buttons",$action_data);
                             </div>
                             <div class="col-sm-4 col-xs-8">
                                 <textarea class="form-control" name="item[purpose]"><?php echo $item['purpose'];?></textarea>
-
-<!--                                <input type="text" name="item[purpose]" id="name" class="form-control" value="--><?php //echo $item['purpose'];?><!--"/>-->
                             </div>
                         </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     <div class="clearfix"></div>
 </form>
 <script type="text/javascript">
-
     jQuery(document).ready(function()
     {
         turn_off_triggers();
