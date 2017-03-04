@@ -251,3 +251,6 @@ $lang['LABEL_MEETING_COMPLETE'] = 'Complete';
 $lang['MSG_MEETING_COMPLETE_ERR'] = 'Meeting Already Completed!! You Can Not Edit It';
 $lang['MSG_MEETING_COMPLETE'] = 'Meeting Completed Successfuly';
 $lang['MSG_MEETING_COMPLETED_ALREADY'] = 'Meeting Already Completed';
+$lang['STATUS_FORWARD'] = 'Status Forward';
+$lang['STATUS_COMPLETE'] = 'Status Complete';
+$lang['STATUS_MEETING_BY_HOM'] = 'Meeting Status HOM';
