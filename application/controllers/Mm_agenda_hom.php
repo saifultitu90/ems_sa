@@ -76,7 +76,7 @@ class Mm_agenda_hom extends Root_Controller
     }
     private function system_get_items()
     {
-        $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date','status'),array('status !="'.$this->config->item('system_status_delete').'"'),0,0,array('id DESC'));
+        $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('*'),array(),0,0,array('id DESC'));
         foreach($items as &$item)
         {
             $item['date']=System_helper::display_date($item['date']);
@@ -92,7 +92,8 @@ class Mm_agenda_hom extends Root_Controller
                 'id' => 0,
                 'date' =>time(),
                 'purpose' => '',
-                'status' => $this->config->item('system_status_active')
+                'status_forward' => '',
+                'status_complete' => ''
             );
             $ajax['system_page_url']=site_url($this->controller_url."/index/add");
             $ajax['status']=true;
@@ -119,7 +120,7 @@ class Mm_agenda_hom extends Root_Controller
                 $id=$this->input->post('id');
             }
             $data['item']=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),'*',array('id ='.$id),1);
-            $data['title']="Edit Agenda list ";
+            $data['title']="Agenda";
             $ajax['status']=true;
             $ajax['system_content'][]=array("id"=>"#system_content","html"=>$this->load->view($this->controller_url."/add_edit",$data,true));
             if($this->message)
@@ -173,7 +174,7 @@ class Mm_agenda_hom extends Root_Controller
             $this->db->trans_start();  //DB Transaction Handle START
             $data=$this->input->post('item');
             $data['date']=System_helper::get_time($data['date']);
-            $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date'),array('id ='.$id,'status ="'.$this->config->item('system_status_active').'"'));
+            $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),array('id','purpose','date'),array('id ='.$id));
             if($items)
             {
                 $time=time();
@@ -213,8 +214,8 @@ class Mm_agenda_hom extends Root_Controller
             $this->db->from($this->config->item('table_mm_agenda_hom_sales').' st');
             $this->db->select('st.*');
             $this->db->select('div.name division_name');
-            $this->db->join($this->config->item('table_setup_location_divisions').' div','div.id = st.id_division','INNER');
-            $this->db->where('st.id_agenda',$id);
+            $this->db->join($this->config->item('table_setup_location_divisions').' div','div.id = st.division_id','INNER');
+            $this->db->where('st.agenda_id',$id);
             $this->db->where('st.revision', 1);
             $data['sales_items']=$this->db->get()->result_array();
             if(!$data['sales_items'])
@@ -223,8 +224,8 @@ class Mm_agenda_hom extends Root_Controller
                 $data['sales_items']=array();
                 foreach($div_items as $item)
                 {
-                    $sales_item['id_agenda']=$id;
-                    $sales_item['id_division']=$item['id'];
+                    $sales_item['agenda_id']=$id;
+                    $sales_item['division_id']=$item['id'];
                     $sales_item['division_name']=$item['name'];
                     $sales_item['budget_total']='';
                     $sales_item['achievement_total']='';
@@ -243,8 +244,8 @@ class Mm_agenda_hom extends Root_Controller
             $this->db->from($this->config->item('table_mm_agenda_hom_collection').' ct');
             $this->db->select('ct.*');
             $this->db->select('div.name division_name');
-            $this->db->join($this->config->item('table_setup_location_divisions').' div','div.id = ct.id_division','INNER');
-            $this->db->where('ct.id_agenda',$id);
+            $this->db->join($this->config->item('table_setup_location_divisions').' div','div.id = ct.division_id','INNER');
+            $this->db->where('ct.agenda_id',$id);
             $this->db->where('ct.revision', 1);
             $data['collection_items']=$this->db->get()->result_array();
             if(!$data['collection_items'])
@@ -253,8 +254,8 @@ class Mm_agenda_hom extends Root_Controller
                 $data['collection_items']=array();
                 foreach($div_items as $item)
                 {
-                    $collection_item['id_agenda']=$id;
-                    $collection_item['id_division']=$item['id'];
+                    $collection_item['agenda_id']=$id;
+                    $collection_item['division_id']=$item['id'];
                     $collection_item['division_name']=$item['name'];
                     $collection_item['budget_total']='';
                     $collection_item['achievement_total']='';
@@ -271,7 +272,7 @@ class Mm_agenda_hom extends Root_Controller
                 }
             }
             $data['agenda_id']=$id;
-            $data['title']="Edit Agenda list ";
+            $data['title']="Agenda";
             $ajax['status']=true;
             if(($data['item']['status_forward']==$this->config->item('system_status_forward')) && !($data['item']['status_complete']==$this->config->item('system_status_complete')))
             {
@@ -312,23 +313,12 @@ class Mm_agenda_hom extends Root_Controller
                 die();
             }
         }
-        else
-        {
-            if(!(isset($this->permissions['add'])&&($this->permissions['add']==1)))
-            {
-                $ajax['status']=false;
-                $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
-                $this->jsonReturn($ajax);
-                die();
-
-            }
-        }
         $this->db->trans_start();
         $time=time();
         $items=Query_helper::get_info($this->config->item('table_mm_agenda_hom_sales'),'*',array('id ='.$id));
         if($items)
         {
-            $this->db->where('id_agenda',$id);
+            $this->db->where('agenda_id',$id);
             $this->db->set('revision', 'revision+1', FALSE);
             $this->db->update($this->config->item('table_mm_agenda_hom_sales'));
         }
@@ -336,14 +326,14 @@ class Mm_agenda_hom extends Root_Controller
         foreach($sales_items as $item)
         {
             $data=$item;
-            $data['id_agenda']=$id;
+            $data['agenda_id']=$id;
             $data['date_created']=$time;
             $data['user_created'] = $user->user_id;
             Query_helper::add($this->config->item('table_mm_agenda_hom_sales'),$data);
         }
         if($items)
         {
-            $this->db->where('id_agenda',$id);
+            $this->db->where('agenda_id',$id);
             $this->db->set('revision', 'revision+1', FALSE);
             $this->db->update($this->config->item('table_mm_agenda_hom_collection'));
         }
@@ -351,7 +341,7 @@ class Mm_agenda_hom extends Root_Controller
         foreach($collection_items as $item)
         {
             $data=$item;
-            $data['id_agenda']=$id;
+            $data['agenda_id']=$id;
             $data['date_created']=$time;
             $data['user_created'] = $user->user_id;
             Query_helper::add($this->config->item('table_mm_agenda_hom_collection'),$data);
@@ -359,7 +349,14 @@ class Mm_agenda_hom extends Root_Controller
         $status_data['status_forward']=$this->input->post('status_forward');
         if(($status_data['status_forward']))
         {
-           Query_helper::update($this->config->item('table_mm_agenda_hom'),$status_data,array("id = ".$id));
+            Query_helper::update($this->config->item('table_mm_agenda_hom'),$status_data,array("id = ".$id));
+            $results=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"'));
+            foreach($results as $result)
+            {
+                $di_agenda_data['agenda_id']=$id;
+                $di_agenda_data['division_id']=$result['id'];
+                Query_helper::add($this->config->item('table_mm_agenda_di'),$di_agenda_data);
+            }
         }
         $this->db->trans_complete();   //DB Transaction Handle END
         if ($this->db->trans_status() === TRUE)
@@ -388,28 +385,18 @@ class Mm_agenda_hom extends Root_Controller
                 die();
             }
         }
-        else
-        {
-            if(!(isset($this->permissions['add'])&&($this->permissions['add']==1)))
-            {
-                $ajax['status']=false;
-                $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
-                $this->jsonReturn($ajax);
-                die();
-
-            }
-        }
         $time=time();
+        $this->db->trans_start();  //DB Transaction Handle START
         $sales_items=$this->input->post('sales_items');
         foreach($sales_items as $division_id=>$item)
         {
             $data=$item;
-            $data['id_agenda']=$id;
+            $data['agenda_id']=$id;
             $data['date_updated']=$time;
             $data['user_updated'] = $user->user_id;
-            $sales_data['id_division']=$division_id;
-            $this->db->where('id_agenda', $data['id_agenda']);
-            $this->db->where('id_division', $sales_data['id_division']);
+            $sales_data['division_id']=$division_id;
+            $this->db->where('agenda_id', $data['agenda_id']);
+            $this->db->where('division_id', $sales_data['division_id']);
             $this->db->where('revision', 1);
             $this->db->update($this->config->item('table_mm_agenda_hom_sales'), $data);
         }
@@ -417,12 +404,12 @@ class Mm_agenda_hom extends Root_Controller
         foreach($collection_items as $division_id=>$item)
         {
             $data=$item;
-            $data['id_agenda']=$id;
+            $data['agenda_id']=$id;
             $data['date_updated']=$time;
             $data['user_updated'] = $user->user_id;
-            $collection_data['id_division']=$division_id;
-            $this->db->where('id_agenda', $data['id_agenda']);
-            $this->db->where('id_division', $collection_data['id_division']);
+            $collection_data['division_id']=$division_id;
+            $this->db->where('agenda_id', $data['agenda_id']);
+            $this->db->where('division_id', $collection_data['division_id']);
             $this->db->where('revision', 1);
             $this->db->update($this->config->item('table_mm_agenda_hom_collection'), $data);
         }
