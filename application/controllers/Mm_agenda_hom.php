@@ -355,6 +355,8 @@ class Mm_agenda_hom extends Root_Controller
             {
                 $di_agenda_data['agenda_id']=$id;
                 $di_agenda_data['division_id']=$result['id'];
+                $di_agenda_data['date_created']=$time;
+                $di_agenda_data['user_created']=$user->user_id;
                 Query_helper::add($this->config->item('table_mm_agenda_di'),$di_agenda_data);
             }
         }
