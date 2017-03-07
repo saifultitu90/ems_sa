@@ -140,7 +140,7 @@ $CI->load->view("action_buttons",$action_data);
             </div>
             <div class="widget-header">
                 <div class="title">
-                    Forward
+                    Complete
                 </div>
                 <div class="clearfix"></div>
             </div>
