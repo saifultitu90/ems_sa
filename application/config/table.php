@@ -111,6 +111,7 @@ $config['table_mm_agenda_hom_collection'] = 'ems_mm_agenda_hom_collection';
 $config['table_mm_agenda_di'] = 'ems_mm_agenda_di';
 $config['table_mm_agenda_di_sales'] = 'ems_mm_agenda_di_sales';
 $config['table_mm_agenda_di_collection'] = 'ems_mm_agenda_di_collection';
+$config['table_mm_agenda_zi'] = 'ems_mm_agenda_zi';
 
 
 
