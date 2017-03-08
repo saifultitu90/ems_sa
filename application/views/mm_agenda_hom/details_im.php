@@ -61,6 +61,8 @@ $CI->load->view("action_buttons",$action_data);
                                         <th>Name</th>
                                         <th>Total Budget</th>
                                         <th>Total Achievement</th>
+                                        <th>Last Month Target</th>
+                                        <th>Last Month Achievement</th>
                                         <th>Current Month Target</th>
                                         <th>Current Month Achievement</th>
                                         <th>Next Month Target Before Meeting</th>
@@ -76,6 +78,8 @@ $CI->load->view("action_buttons",$action_data);
                                             <input type="hidden" name="sales_items[<?php echo $sales_item['division_id']?>][division_id]" value="<?php echo $sales_item['division_id'];?>"></td>
                                             <td><?php echo $sales_item['budget_total'];?></td>
                                             <td><?php echo $sales_item['achievement_total'];?></td>
+                                            <td><?php echo $sales_item['target_last_month'];?></td>
+                                            <td><?php echo $sales_item['achievement_last_month'];?></td>
                                             <td><?php echo $sales_item['target_current_month'];?></td>
                                             <td><?php echo $sales_item['achievement_current_month'];?></td>
                                             <td><?php echo $sales_item['target_next_month'];?></td>
@@ -108,6 +112,8 @@ $CI->load->view("action_buttons",$action_data);
                                         <th>Name</th>
                                         <th>Total Budget</th>
                                         <th>Total Achievement</th>
+                                        <th>Last Month Target</th>
+                                        <th>Last Month Achievement</th>
                                         <th>Current Month Target</th>
                                         <th>Current Month Achievement</th>
                                         <th>Next Month Target Before Meeting</th>
@@ -123,6 +129,8 @@ $CI->load->view("action_buttons",$action_data);
                                             <input type="hidden" name="collection_items[<?php echo $collection_item['division_id'];?>][division_id]" value="<?php echo $collection_item['division_id'];?>">
                                             <td><?php echo $collection_item['budget_total'];?></td>
                                             <td><?php echo $collection_item['achievement_total'];?></td>
+                                            <td><?php echo $collection_item['target_last_month'];?></td>
+                                            <td><?php echo $collection_item['achievement_last_month'];?></td>
                                             <td><?php echo $collection_item['target_current_month'];?></td>
                                             <td><?php echo $collection_item['achievement_current_month'];?></td>
                                             <td><?php echo $collection_item['target_next_month'];?></td>

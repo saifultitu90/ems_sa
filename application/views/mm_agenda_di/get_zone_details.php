@@ -42,6 +42,8 @@
                             <th>Name</th>
                             <th>Total Budget</th>
                             <th>Total Achievement</th>
+                            <th>Last Month Target</th>
+                            <th>Last Month Achievement</th>
                             <th>Current Month Target</th>
                             <th>Current Month Achievement</th>
                             <th>Next Month Target Before Meeting</th>
@@ -56,6 +58,8 @@
                                 <td><b><?php echo $s_item_hom['division_name'];?></b></td>
                                 <td><b><?php echo $s_item_hom['budget_total'];?></b></td>
                                 <td><b><?php echo $s_item_hom['achievement_total'];?></b></td>
+                                <td><b><?php echo $s_item_hom['target_last_month'];?></b></td>
+                                <td><b><?php echo $s_item_hom['achievement_last_month'];?></b></td>
                                 <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                 <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
                                 <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
@@ -70,6 +74,8 @@
                                 <td><?php echo $s_item['zone_name'];?></td>
                                 <td><?php echo $s_item['budget_total'];?></td>
                                 <td><?php echo $s_item['achievement_total'];?></td>
+                                <td><?php echo $s_item['target_last_month'];?></td>
+                                <td><?php echo $s_item['achievement_last_month'];?></td>
                                 <td><?php echo $s_item['target_current_month'];?></td>
                                 <td><?php echo $s_item['achievement_current_month'];?></td>
                                 <td><?php echo $s_item['target_next_month'];?></td>
@@ -102,6 +108,8 @@
                             <th>Name</th>
                             <th>Total Budget</th>
                             <th>Total Achievement</th>
+                            <th>Last Month Target</th>
+                            <th>Last Month Achievement</th>
                             <th>Current Month Target</th>
                             <th>Current Month Achievement</th>
                             <th>Next Month Target Before Meeting</th>
@@ -117,6 +125,8 @@
                                 <input type="hidden" name="collection_division_id" value="<?php echo $c_item_hom['division_id'];?>">
                                 <td><b><?php echo $c_item_hom['budget_total'];?></b></td>
                                 <td><b><?php echo $c_item_hom['achievement_total'];?></b></td>
+                                <td><b><?php echo $c_item_hom['target_last_month'];?></b></td>
+                                <td><b><?php echo $c_item_hom['achievement_last_month'];?></b></td>
                                 <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                 <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
                                 <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
@@ -131,6 +141,8 @@
                                 <input type="hidden" name="citems[<?php echo $c_item['zone_id']?>][zone_id]" value="<?php echo $c_item['zone_id'];?>"></td>
                                 <td><?php echo $c_item['budget_total'];?></td>
                                 <td><?php echo $c_item['achievement_total'];?></td>
+                                <td><?php echo $c_item['target_last_month'];?></td>
+                                <td><?php echo $c_item['achievement_last_month'];?></td>
                                 <td><?php echo $c_item['target_current_month'];?></td>
                                 <td><?php echo $c_item['achievement_current_month'];?></td>
                                 <td><?php echo $c_item['target_next_month'];?></td>

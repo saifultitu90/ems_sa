@@ -9,52 +9,52 @@ $CI->load->view("action_buttons",$action_data);
 <input type="hidden" id="agenda_id" name="agenda_id" value="<?php echo $agenda_id; ?>" />
 <input type="hidden" id="system_save_new_status" name="system_save_new_status" value="0" />
 <div class="row widget">
-<div class="widget-header">
-    <div class="title">
-        <?php echo $title; ?>
-    </div>
-    <div class="clearfix"></div>
-</div>
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a class="external" data-toggle="collapse" data-target="#collapse4" href="#">
-                    Select division</a>
-            </h4>
+    <div class="widget-header">
+        <div class="title">
+            <?php echo $title; ?>
         </div>
-        <div id="collapse4" class="panel-collapse collapse">
-            <div class="row show-grid">
-                <div class="col-xs-12" id="system_jqx_containers">
-                    <div style="" class="row show-grid">
-                        <div class="col-xs-4">
-                            <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_DIVISION_NAME');?><span style="color:#FF0000">*</span></label>
-                        </div>
-                        <div class="col-sm-4 col-xs-8">
-                            <select id="division_id" name="division_id" class="form-control">
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="external" data-toggle="collapse" data-target="#collapse4" href="#">
+                        Select division</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="row show-grid">
+                    <div class="col-xs-12" id="system_jqx_containers">
+                        <div style="" class="row show-grid">
+                            <div class="col-xs-4">
+                                <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_DIVISION_NAME');?><span style="color:#FF0000">*</span></label>
+                            </div>
+                            <div class="col-sm-4 col-xs-8">
+                                <select id="division_id" name="division_id" class="form-control">
 
-                                <option value=""><?php echo $this->lang->line('SELECT');?></option>
-                                <?php
-                                foreach($divisions as $division)
-                                {?>
-                                    <option value="<?php echo $division['value']?>"><?php echo $division['text'];?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
+                                    <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                                    <?php
+                                    foreach($divisions as $division)
+                                    {?>
+                                        <option value="<?php echo $division['value']?>"><?php echo $division['text'];?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div style="<?php if($div_id==0){echo 'display:none';} ?>" class="row show-grid" id="target_container">
+
+        </div>
+
     </div>
-
-<div style="<?php if($div_id==0){echo 'display:none';} ?>" class="row show-grid" id="target_container">
-
-</div>
-
-</div>
 </div>
 <div class="clearfix"></div>
 

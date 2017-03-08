@@ -125,6 +125,8 @@ class Mm_agenda_di extends Root_Controller
                     $sales_item['zone_name']=$result['name'];
                     $sales_item['budget_total']='';
                     $sales_item['achievement_total']='';
+                    $sales_item['target_last_month']='';
+                    $sales_item['achievement_last_month']='';
                     $sales_item['target_current_month']='';
                     $sales_item['achievement_current_month']='';
                     $sales_item['target_next_month']='';
@@ -166,6 +168,8 @@ class Mm_agenda_di extends Root_Controller
                     $collection_item['zone_name']=$result['name'];
                     $collection_item['budget_total']='';
                     $collection_item['achievement_total']='';
+                    $collection_item['target_last_month']='';
+                    $collection_item['achievement_last_month']='';
                     $collection_item['target_current_month']='';
                     $collection_item['achievement_current_month']='';
                     $collection_item['target_next_month']='';
@@ -522,6 +526,8 @@ class Mm_agenda_di extends Root_Controller
                     $sales_item['zone_name']=$result['name'];
                     $sales_item['budget_total']='';
                     $sales_item['achievement_total']='';
+                    $sales_item['target_last_month']='';
+                    $sales_item['achievement_last_month']='';
                     $sales_item['target_current_month']='';
                     $sales_item['achievement_current_month']='';
                     $sales_item['target_next_month']='';
@@ -563,6 +569,8 @@ class Mm_agenda_di extends Root_Controller
                     $collection_item['zone_name']=$result['name'];
                     $collection_item['budget_total']='';
                     $collection_item['achievement_total']='';
+                    $collection_item['target_last_month']='';
+                    $collection_item['achievement_last_month']='';
                     $collection_item['target_current_month']='';
                     $collection_item['achievement_current_month']='';
                     $collection_item['target_next_month']='';

@@ -97,6 +97,8 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Name</th>
                                 <th>Total Budget</th>
                                 <th>Total Achievement</th>
+                                <th>Last Month Target</th>
+                                <th>Last Month Achievement</th>
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
                                 <th>Next Month Target Before Meeting</th>
@@ -112,6 +114,8 @@ $CI->load->view("action_buttons",$action_data);
                                     <input type="hidden" name="sales_division_id" value="<?php echo $s_item_hom['division_id'];?>"></td>
                                     <td><b><?php echo $s_item_hom['budget_total'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_last_month'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['achievement_last_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
@@ -123,16 +127,18 @@ $CI->load->view("action_buttons",$action_data);
                             <?php } ?>
                             <?php foreach($sales_items as $s_item){?>
                                 <tr>
-                                        <td><?php echo $s_item['zone_name'];?></td>
-                                        <input type="hidden" name="sitems[<?php echo $s_item['zone_id']?>][zone_id]" value="<?php echo $s_item['zone_id'];?>"></td>
-                                        <td><?php echo $s_item['budget_total'];?></td>
-                                        <td><?php echo $s_item['achievement_total'];?></td>
-                                        <td><?php echo $s_item['target_current_month'];?></td>
-                                        <td><?php echo $s_item['achievement_current_month'];?></td>
-                                        <td><?php echo $s_item['target_next_month'];?></td>
-                                        <td><?php echo $s_item['target_next_month_im'];?></td>
-                                        <td><?php echo $s_item['remarks_before_meeting'];?></td>
-                                        <td><input type="text" name="sitems[<?php echo $s_item['zone_id']?>][remarks_in_meeting]" value="<?php echo $s_item['remarks_in_meeting'];?>"></td>
+                                    <td><?php echo $s_item['zone_name'];?></td>
+                                    <input type="hidden" name="sitems[<?php echo $s_item['zone_id']?>][zone_id]" value="<?php echo $s_item['zone_id'];?>"></td>
+                                    <td><?php echo $s_item['budget_total'];?></td>
+                                    <td><?php echo $s_item['achievement_total'];?></td>
+                                    <td><?php echo $s_item['target_last_month'];?></td>
+                                    <td><?php echo $s_item['achievement_last_month'];?></td>
+                                    <td><?php echo $s_item['target_current_month'];?></td>
+                                    <td><?php echo $s_item['achievement_current_month'];?></td>
+                                    <td><?php echo $s_item['target_next_month'];?></td>
+                                    <td><?php echo $s_item['target_next_month_im'];?></td>
+                                    <td><?php echo $s_item['remarks_before_meeting'];?></td>
+                                    <td><textarea class="form-control" name="sitems[<?php echo $s_item['zone_id']?>][remarks_in_meeting]"><?php echo $s_item['remarks_in_meeting'];?></textarea></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -159,6 +165,8 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Name</th>
                                 <th>Total Budget</th>
                                 <th>Total Achievement</th>
+                                <th>Last Month Target</th>
+                                <th>Last Month Achievement</th>
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
                                 <th>Next Month Target Before Meeting</th>
@@ -174,6 +182,8 @@ $CI->load->view("action_buttons",$action_data);
                                     <input type="hidden" name="collection_division_id" value="<?php echo $c_item_hom['division_id'];?>">
                                     <td><b><?php echo $c_item_hom['budget_total'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_last_month'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['achievement_last_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
@@ -185,16 +195,18 @@ $CI->load->view("action_buttons",$action_data);
                             <?php } ?>
                             <?php foreach($collection_items as $c_item){?>
                                 <tr>
-                                        <td><?php echo $c_item['zone_name'];?></td>
-                                        <input type="hidden" name="citems[<?php echo $c_item['zone_id']?>][zone_id]" value="<?php echo $c_item['zone_id'];?>"></td>
-                                        <td><?php echo $c_item['budget_total'];?></td>
-                                        <td><?php echo $c_item['achievement_total'];?></td>
-                                        <td><?php echo $c_item['target_current_month'];?></td>
-                                        <td><?php echo $c_item['achievement_current_month'];?></td>
-                                        <td><?php echo $c_item['target_next_month'];?></td>
-                                        <td><?php echo $c_item['target_next_month_im'];?></td>
-                                        <td><?php echo $c_item['remarks_before_meeting'];?></td>
-                                        <td><input type="text" name="citems[<?php echo $c_item['zone_id']?>][remarks_in_meeting]" value="<?php echo $c_item['remarks_in_meeting'];?>"></td>
+                                    <td><?php echo $c_item['zone_name'];?></td>
+                                    <input type="hidden" name="citems[<?php echo $c_item['zone_id']?>][zone_id]" value="<?php echo $c_item['zone_id'];?>"></td>
+                                    <td><?php echo $c_item['budget_total'];?></td>
+                                    <td><?php echo $c_item['achievement_total'];?></td>
+                                    <td><?php echo $c_item['target_last_month'];?></td>
+                                    <td><?php echo $c_item['achievement_last_month'];?></td>
+                                    <td><?php echo $c_item['target_current_month'];?></td>
+                                    <td><?php echo $c_item['achievement_current_month'];?></td>
+                                    <td><?php echo $c_item['target_next_month'];?></td>
+                                    <td><?php echo $c_item['target_next_month_im'];?></td>
+                                    <td><?php echo $c_item['remarks_before_meeting'];?></td>
+                                    <td><input class="form-control" type="text" name="citems[<?php echo $c_item['zone_id']?>][remarks_in_meeting]" value="<?php echo $c_item['remarks_in_meeting'];?>"></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
