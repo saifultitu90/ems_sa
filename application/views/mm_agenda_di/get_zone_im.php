@@ -24,8 +24,7 @@ $CI = & get_instance();
                     <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_PURPOSE');?><span>:</span></label>
                 </div>
                 <div class="col-xs-4">
-                    <!--                <label class="control-label">--><?php //echo $item['purpose'];?><!--</label>-->
-                    <label class="control-label">On process</label>
+                    <label class="control-label"><?php echo $item['purpose'];?></label>
                 </div>
             </div>
         </div>
@@ -47,10 +46,13 @@ $CI = & get_instance();
                                 <th>Name</th>
                                 <th>Total Budget</th>
                                 <th>Total Achievement</th>
+                                <th>Total Variance</th>
                                 <th>Last Month Target</th>
                                 <th>Last Month Achievement</th>
+                                <th>Last Month Variance</th>
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
+                                <th>Current Month Variance</th>
                                 <th>Next Month Target Before Meeting</th>
                                 <th>Next Month Target In Meeting</th>
                                 <th>Remarks Before Meeting</th>
@@ -64,15 +66,17 @@ $CI = & get_instance();
                                     <input type="hidden" name="sales_division_id" value="<?php echo $s_item_hom['division_id'];?>"></td>
                                     <td><b><?php echo $s_item_hom['budget_total'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['budget_total']-$s_item_hom['achievement_total'])?></b></td>
                                     <td><b><?php echo $s_item_hom['target_last_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['target_last_month']-$s_item_hom['achievement_last_month'])?></b></td>
                                     <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['target_current_month']-$s_item_hom['achievement_current_month'])?></b></td>
                                     <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
                                     <td><?php echo $s_item_hom['target_next_month_im'];?></td>
                                     <td><b><?php echo $s_item_hom['remarks_before_meeting'];?></b></td>
                                     <td><?php echo $s_item_hom['remarks_in_meeting'];?></td>
-
                                 </tr>
                             <?php } ?>
                             <?php foreach($sales_items as $s_item){?>
@@ -81,10 +85,13 @@ $CI = & get_instance();
                                     <input type="hidden" name="sitems[<?php echo $s_item['zone_id']?>][zone_id]" value="<?php echo $s_item['zone_id'];?>"></td>
                                     <td><?php echo $s_item['budget_total'];?></td>
                                     <td><?php echo $s_item['achievement_total'];?></td>
+                                    <td><?php echo ($s_item['budget_total']-$s_item['achievement_total'])?></td>
                                     <td><?php echo $s_item['target_last_month'];?></td>
                                     <td><?php echo $s_item['achievement_last_month'];?></td>
+                                    <td><?php echo ($s_item['target_last_month']-$s_item['achievement_last_month'])?></td>
                                     <td><?php echo $s_item['target_current_month'];?></td>
                                     <td><?php echo $s_item['achievement_current_month'];?></td>
+                                    <td><?php echo ($s_item['target_current_month']-$s_item['achievement_current_month'])?></td>
                                     <td><?php echo $s_item['target_next_month'];?></td>
                                     <td><?php echo $s_item['target_next_month_im'];?></td>
                                     <td><?php echo $s_item['remarks_before_meeting'];?></td>
@@ -115,10 +122,13 @@ $CI = & get_instance();
                                 <th>Name</th>
                                 <th>Total Budget</th>
                                 <th>Total Achievement</th>
+                                <th>Total Variance</th>
                                 <th>Last Month Target</th>
                                 <th>Last Month Achievement</th>
+                                <th>Last Month Variance</th>
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
+                                <th>Current Month Variance</th>
                                 <th>Next Month Target Before Meeting</th>
                                 <th>Next Month Target In Meeting</th>
                                 <th>Remarks Before Meeting</th>
@@ -132,15 +142,17 @@ $CI = & get_instance();
                                     <input type="hidden" name="collection_division_id" value="<?php echo $c_item_hom['division_id'];?>">
                                     <td><b><?php echo $c_item_hom['budget_total'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['budget_total']-$c_item_hom['achievement_total'])?></b></td>
                                     <td><b><?php echo $c_item_hom['target_last_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['target_last_month']-$c_item_hom['achievement_last_month'])?></b></td>
                                     <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['target_current_month']-$c_item_hom['achievement_current_month'])?></b></td>
                                     <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
                                     <td><?php echo $c_item_hom['target_next_month_im'];?></td>
                                     <td><b><?php echo $c_item_hom['remarks_before_meeting'];?></b></td>
                                     <td><?php echo $c_item_hom['remarks_in_meeting'];?></td>
-
                                 </tr>
                             <?php } ?>
                             <?php foreach($collection_items as $c_item){?>
@@ -149,14 +161,17 @@ $CI = & get_instance();
                                     <input type="hidden" name="citems[<?php echo $c_item['zone_id']?>][zone_id]" value="<?php echo $c_item['zone_id'];?>"></td>
                                     <td><?php echo $c_item['budget_total'];?></td>
                                     <td><?php echo $c_item['achievement_total'];?></td>
+                                    <td><?php echo ($c_item['budget_total']-$c_item['achievement_total'])?></td>
                                     <td><?php echo $c_item['target_last_month'];?></td>
                                     <td><?php echo $c_item['achievement_last_month'];?></td>
+                                    <td><?php echo ($c_item['target_last_month']-$c_item['achievement_last_month'])?></td>
                                     <td><?php echo $c_item['target_current_month'];?></td>
                                     <td><?php echo $c_item['achievement_current_month'];?></td>
+                                    <td><?php echo ($c_item['target_current_month']-$c_item['achievement_current_month'])?></td>
                                     <td><?php echo $c_item['target_next_month'];?></td>
                                     <td><?php echo $c_item['target_next_month_im'];?></td>
                                     <td><?php echo $c_item['remarks_before_meeting'];?></td>
-                                    <td><input class="form-control" type="text" name="citems[<?php echo $c_item['zone_id']?>][remarks_in_meeting]" value="<?php echo $c_item['remarks_in_meeting'];?>"></td>
+                                    <td><textarea class="form-control" name="citems[<?php echo $c_item['zone_id']?>][remarks_in_meeting]"><?php echo $c_item['remarks_in_meeting'];?></textarea></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -177,7 +192,7 @@ $CI = & get_instance();
             <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEETING_COMPLETE');?></label>
         </div>
         <div class="col-sm-4 col-xs-8">
-            <select id="status_forward" name="status_complete" class="form-control">
+            <select id="status_complete" name="status_complete" class="form-control">
                 <option value=""><?php echo $CI->lang->line('SELECT');?></option>
                 <option value="<?php echo $CI->config->item('system_status_complete');?>"><?php echo $CI->config->item('system_status_complete');?></option>
             </select>

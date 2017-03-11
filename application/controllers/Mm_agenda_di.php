@@ -80,8 +80,8 @@ class Mm_agenda_di extends Root_Controller
     {
         if(isset($this->permissions['edit'])&&($this->permissions['edit']==1))
         {
-            $results=$this->locations;
-            $division_id=$results['division_id'];
+            $location_results=$this->locations;
+            $division_id=$location_results['division_id'];
             if(($this->input->post('id')))
             {
                 $id=$this->input->post('id');
@@ -185,7 +185,7 @@ class Mm_agenda_di extends Root_Controller
             $data['title']="Agenda";
             $ajax['status']=true;
             $data['id']=$id;
-            $data['div_id']=$results['division_id'];
+            $data['div_id']=$location_results['division_id'];
             $data['divisions']=Query_helper::get_info($this->config->item('table_setup_location_divisions'),array('id value','name text'),array('status ="'.$this->config->item('system_status_active').'"'));
             $data['hom_meeting_status']=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),'*',array('id ='.$id),1);
             if(($data['item']['status_forward']==$this->config->item('system_status_forward')) && !($data['item']['status_complete']==$this->config->item('system_status_complete')))
@@ -243,12 +243,12 @@ class Mm_agenda_di extends Root_Controller
 
             }
         }
-        if(!$this->check_validation())
-        {
-            $ajax['status']=false;
-            $ajax['system_message']=$this->message;
-            $this->jsonReturn($ajax);
-        }
+//        if(!$this->check_validation())
+//        {
+//            $ajax['status']=false;
+//            $ajax['system_message']=$this->message;
+//            $this->jsonReturn($ajax);
+//        }
         if(!($data['hom_meeting_status']['status_complete']==$this->config->item('system_status_complete')) && ($this->input->post('status_forward')))
         {
             $ajax['status']=false;
@@ -265,7 +265,9 @@ class Mm_agenda_di extends Root_Controller
                 $data['date']=System_helper::get_time($data['date']);
                 $data['user_updated'] = $user->user_id;
                 $data['date_updated'] = $time;
-                Query_helper::update($this->config->item('table_mm_agenda_di'),$data,array("agenda_id = ".$agenda_id,"division_id = ".$div_id));
+                if($data['date']){
+                    Query_helper::update($this->config->item('table_mm_agenda_di'),$data,array("agenda_id = ".$agenda_id,"division_id = ".$div_id));
+                }
                 $data['get_sales_items']=Query_helper::get_info($this->config->item('table_mm_agenda_di_sales'),'*',array('agenda_id ='.$agenda_id,'division_id ='.$div_id));
                 if($data['get_sales_items'])
                 {
@@ -359,6 +361,12 @@ class Mm_agenda_di extends Root_Controller
                     $results=Query_helper::get_info($this->config->item('table_setup_location_zones'),array('id','name','status','ordering'),array('status !="'.$this->config->item('system_status_delete').'"',"division_id = ".$div_id));
                     foreach($results as $result)
                     {
+                        if(!$this->check_validation())
+                        {
+                            $ajax['status']=false;
+                            $ajax['system_message']=$this->message;
+                            $this->jsonReturn($ajax);
+                        }
                         $zi_agenda_data['agenda_id']=$agenda_id;
                         $zi_agenda_data['zone_id']=$result['id'];
                         $zi_agenda_data['date_created']=$time;
@@ -368,7 +376,9 @@ class Mm_agenda_di extends Root_Controller
                         $data['date']=System_helper::get_time($data['date']);
                         $data['user_updated'] = $user->user_id;
                         $data['date_updated'] = $time;
-                        Query_helper::update($this->config->item('table_mm_agenda_di'),$data,array("agenda_id = ".$agenda_id,"division_id = ".$div_id));
+                        if($data['date']){
+                            Query_helper::update($this->config->item('table_mm_agenda_di'),$data,array("agenda_id = ".$agenda_id,"division_id = ".$div_id));
+                        }
                     }
                 }
                 else if(!($status_data['status_forward']) && ($data['hom_meeting_status']['status_complete']==$this->config->item('system_status_complete')))
@@ -377,7 +387,9 @@ class Mm_agenda_di extends Root_Controller
                     $data['date']=System_helper::get_time($data['date']);
                     $data['user_updated'] = $user->user_id;
                     $data['date_updated'] = $time;
-                    Query_helper::update($this->config->item('table_mm_agenda_di'),$data,array("agenda_id = ".$agenda_id,"division_id = ".$div_id));
+                    if($data['date']){
+                        Query_helper::update($this->config->item('table_mm_agenda_di'),$data,array("agenda_id = ".$agenda_id,"division_id = ".$div_id));
+                    }
                 }
                 else
                 {
@@ -484,6 +496,13 @@ class Mm_agenda_di extends Root_Controller
     }
     private function check_validation()
     {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('item[date]',$this->lang->line('LABEL_DATE_AGENDA'),'required');
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->message=validation_errors();
+            return false;
+        }
         return true;
     }
     public function get_zone()
@@ -492,10 +511,18 @@ class Mm_agenda_di extends Root_Controller
         {
             $div_id=$this->input->post('division_id');
             $id=$this->input->post('agenda_id');
-            $data['item']=Query_helper::get_info($this->config->item('table_mm_agenda_di'),'*',array('agenda_id ='.$id,'division_id ='.$div_id),1);
+            $this->db->select('ad.*');
+            $this->db->select('ah.purpose');
+            $this->db->from($this->config->item('table_mm_agenda_di').' ad');
+            $this->db->join($this->config->item('table_mm_agenda_hom').' ah','ah.id = ad.agenda_id','LEFT');
+            $this->db->where('ad.agenda_id',$id);
+            $this->db->where('ad.division_id',$div_id);
+            $data['item']=$this->db->get()->row_array();
+//            print_r($data['item']);exit();
+            //$data['item']=Query_helper::get_info($this->config->item('table_mm_agenda_di'),'*',array('agenda_id ='.$id,'division_id ='.$div_id),1);
             if(is_null($data['item']['date']))
             {
-                $data["item"]['date'] =time();
+                $data['item']['date'] ='';
             }
             $this->db->from($this->config->item('table_mm_agenda_hom_sales').' st');
             $this->db->select('st.*');
@@ -614,7 +641,7 @@ class Mm_agenda_di extends Root_Controller
     private function details_helper($id)
     {
         $data['agenda_id']=$id;
-        $data['title']="Edit Agenda list ";
+        $data['title']="Edit Agenda list";
         $ajax['status']=true;
         $results=$this->locations;
         $data['div_id']=$results['division_id'];

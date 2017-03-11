@@ -49,4 +49,3 @@ $config['system_bank_type_expense']='Expense';
 // meeting minutes
 $config['system_status_forward']='Forwarded';
 $config['system_status_complete']='Completed';
-

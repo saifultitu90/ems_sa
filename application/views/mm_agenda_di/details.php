@@ -57,20 +57,20 @@ $CI->load->view("action_buttons",$action_data);
     </div>
 </div>
 <div class="clearfix"></div>
-
-<script type="text/javascript">
-
-    jQuery(document).ready(function()
-    {
-        turn_off_triggers();
-        $(".datepicker").datepicker({dateFormat : display_date_format});
-    });
-</script>
-
 <script type="text/javascript">
     jQuery(document).ready(function()
     {
+
+        <!--        $(".datepicker").datepicker({dateFormat : display_date_format});-->
+        <!--        $(".dob").datepicker({dateFormat : display_date_format,changeMonth: true,changeYear: true,yearRange: "-100:+0"});-->
+        <!--        $(":file").filestyle({input: false,buttonText: "--><?php //echo $CI->lang->line('UPLOAD');?><!--", buttonName: "btn-danger"});-->
         turn_off_triggers();
+        $(document).off('input','.achievement_total');
+        $(document).off('input','.budget_total');
+        $(document).off('input','.achievement_last_month');
+        $(document).off('input','.target_last_month');
+        $(document).off('input','.achievement_current_month');
+        $(document).off('input','.target_current_month');
         $(document).on("change","#division_id",function()
         {
             var division_id=$('#division_id').val();
@@ -99,5 +99,28 @@ $CI->load->view("action_buttons",$action_data);
                 $('#target_container').hide();
             }
         });
+
+        $(document).on("input",".achievement_total,.budget_total",function()
+        {
+            var budget_total=$(this).closest('tr').find('.budget_total').val();
+            var achievement_total=$(this).closest('tr').find('.achievement_total').val();
+            var variance_total=budget_total-achievement_total;
+            $(this).closest('tr').find('.variance_total').val(variance_total);
+        });
+        $(document).on("input",".target_last_month,.achievement_last_month",function()
+        {
+            var target_last_month=$(this).closest('tr').find('.target_last_month').val();
+            var achievement_last_month=$(this).closest('tr').find('.achievement_last_month').val();
+            var variance_last_month=target_last_month-achievement_last_month;
+            $(this).closest('tr').find('.variance_last_month').val(variance_last_month);
+        });
+        $(document).on("input",".target_current_month,.achievement_current_month",function()
+        {
+            var target_current_month=$(this).closest('tr').find('.target_current_month').val();
+            var achievement_current_month=$(this).closest('tr').find('.achievement_current_month').val();
+            var variance_current_month=target_current_month-achievement_current_month;
+            $(this).closest('tr').find('.variance_current_month').val(variance_current_month);
+        });
+        $(".datepicker").datepicker({dateFormat : display_date_format});
     });
 </script>

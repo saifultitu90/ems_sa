@@ -76,8 +76,7 @@ $CI->load->view("action_buttons",$action_data);
                     <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_PURPOSE');?><span>:</span></label>
                 </div>
                 <div class="col-xs-4">
-                    <!--                <label class="control-label">--><?php //echo $item['purpose'];?><!--</label>-->
-                    <label class="control-label">On process</label>
+                    <label class="control-label"><?php echo $item['purpose'];?></label>
 
                 </div>
             </div>
@@ -102,10 +101,13 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Name</th>
                                 <th>Total Budget</th>
                                 <th>Total Achievement</th>
+                                <th>Total Variance</th>
                                 <th>Last Month Target</th>
                                 <th>Last Month Achievement</th>
+                                <th>Last Month Variance</th>
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
+                                <th>Current Month Variance</th>
                                 <th>Next Month Target</th>
                                 <th>Remarks Before Meeting</th>
                             </tr>
@@ -118,10 +120,13 @@ $CI->load->view("action_buttons",$action_data);
                                     <input type="hidden" name="sales_division_id" value="<?php echo $s_item_hom['division_id'];?>"></td>
                                     <td><b><?php echo $s_item_hom['budget_total'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['budget_total']-$s_item_hom['achievement_total']);?></b></td>
                                     <td><b><?php echo $s_item_hom['target_last_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['target_last_month']-$s_item_hom['achievement_last_month']);?></b></td>
                                     <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['target_current_month']-$s_item_hom['achievement_current_month']);?></b></td>
                                     <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['remarks_before_meeting'];?></b></td>
                                 </tr>
@@ -133,21 +138,27 @@ $CI->load->view("action_buttons",$action_data);
                                         <input type="hidden" name="sales_zone_id[]" value="<?php echo $sales_item['zone_id'];?>"></td>
                                         <td><?php echo $sales_item['budget_total'];?></td>
                                         <td><?php echo $sales_item['achievement_total'];?></td>
+                                        <td><?php echo ($sales_item['budget_total']-$sales_item['achievement_total'])?></td>
                                         <td><?php echo $sales_item['target_last_month'];?></td>
                                         <td><?php echo $sales_item['achievement_last_month'];?></td>
+                                        <td><?php echo ($sales_item['target_last_month']-$sales_item['achievement_last_month'])?></td>
                                         <td><?php echo $sales_item['target_current_month'];?></td>
                                         <td><?php echo $sales_item['achievement_current_month'];?></td>
+                                        <td><?php echo ($sales_item['target_current_month']-$sales_item['achievement_current_month'])?></td>
                                         <td><?php echo $sales_item['target_next_month'];?></td>
                                         <td><?php echo $sales_item['remarks_before_meeting'];?></td>
                                     <?php } else{?>
                                         <td><?php echo $sales_item['zone_name'];?></td>
                                         <input type="hidden" name="s_items[<?php echo $sales_item['zone_id'];?>][zone_id]" value="<?php echo $sales_item['zone_id'];?>"></td>
-                                        <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
-                                        <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
-                                        <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][target_last_month]" value="<?php echo $sales_item['target_last_month'];?>"></td>
-                                        <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_last_month]" value="<?php echo $sales_item['achievement_last_month'];?>"></td>
-                                        <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][target_current_month]" value="<?php echo $sales_item['target_current_month'];?>"></td>
-                                        <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_current_month]" value="<?php echo $sales_item['achievement_current_month'];?>"></td>
+                                        <td><input class="form-control budget_total integer_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
+                                        <td><input class="form-control achievement_total float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
+                                        <td><input type="text" class="form-control variance_total" value="<?php echo ($sales_item['budget_total']-$sales_item['achievement_total'])?>" disabled></td>
+                                        <td><input class="form-control target_last_month integer_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][target_last_month]" value="<?php echo $sales_item['target_last_month'];?>"></td>
+                                        <td><input class="form-control achievement_last_month float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_last_month]" value="<?php echo $sales_item['achievement_last_month'];?>"></td>
+                                        <td><input type="text" class="form-control variance_last_month" value="<?php echo ($sales_item['target_last_month']-$sales_item['achievement_last_month'])?>" disabled></td>
+                                        <td><input class="form-control target_current_month integer_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][target_current_month]" value="<?php echo $sales_item['target_current_month'];?>"></td>
+                                        <td><input class="form-control achievement_current_month float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_current_month]" value="<?php echo $sales_item['achievement_current_month'];?>"></td>
+                                        <td><input type="text" class="form-control variance_current_month" value="<?php echo ($sales_item['target_current_month']-$sales_item['achievement_current_month'])?>" disabled></td>
                                         <td><input class="form-control" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][target_next_month]" value="<?php echo $sales_item['target_next_month'];?>"></td>
                                         <td><textarea class="form-control" name="s_items[<?php echo $sales_item['zone_id']?>][remarks_before_meeting]"><?php echo $sales_item['remarks_before_meeting'];?></textarea></td>
                                     <?php } ?>
@@ -177,10 +188,13 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Name</th>
                                 <th>Total Budget</th>
                                 <th>Total Achievement</th>
+                                <th>Total Variance</th>
                                 <th>Last Month Target</th>
                                 <th>Last Month Achievement</th>
+                                <th>Last Month Variance</th>
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
+                                <th>Current Month Variance</th>
                                 <th>Next Month Target</th>
                                 <th>Remarks Before Meeting</th>
                             </tr>
@@ -192,10 +206,13 @@ $CI->load->view("action_buttons",$action_data);
                                     <input type="hidden" name="collection_division_id" value="<?php echo $c_item_hom['division_id'];?>">
                                     <td><b><?php echo $c_item_hom['budget_total'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['budget_total']-$c_item_hom['achievement_total'])?></b></td>
                                     <td><b><?php echo $c_item_hom['target_last_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['target_last_month']-$c_item_hom['achievement_last_month'])?></b></td>
                                     <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['target_current_month']-$c_item_hom['achievement_current_month'])?></b></td>
                                     <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['remarks_before_meeting'];?></b></td>
                                 </tr>
@@ -207,21 +224,27 @@ $CI->load->view("action_buttons",$action_data);
                                         <input type="hidden" name="collection_zone_id[]" value="<?php echo $collection_item['zone_id'];?>"></td>
                                         <td><?php echo $collection_item['budget_total'];?></td>
                                         <td><?php echo $collection_item['achievement_total'];?></td>
+                                        <td><?php echo ($collection_item['budget_total']-$collection_item['achievement_total'])?></td>
                                         <td><?php echo $collection_item['target_last_month'];?></td>
                                         <td><?php echo $collection_item['achievement_last_month'];?></td>
+                                        <td><?php echo ($collection_item['target_last_month']-$collection_item['achievement_last_month'])?></td>
                                         <td><?php echo $collection_item['target_current_month'];?></td>
                                         <td><?php echo $collection_item['achievement_current_month'];?></td>
+                                        <td><?php echo ($collection_item['target_current_month']-$collection_item['achievement_current_month'])?></td>
                                         <td><?php echo $collection_item['target_next_month'];?></td>
                                         <td><?php echo $collection_item['remarks_before_meeting'];?></td>
                                     <?php } else{?>
                                         <td><?php echo $collection_item['zone_name'];?></td>
                                         <input type="hidden" name="c_items[<?php echo $collection_item['zone_id'];?>][zone_id]" value="<?php echo $collection_item['zone_id'];?>"></td>
-                                        <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>">
-                                        <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
-                                        <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][target_last_month]" value="<?php echo $collection_item['target_last_month'];?>"></td>
-                                        <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_last_month]" value="<?php echo $collection_item['achievement_last_month'];?>"></td>
-                                        <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][target_current_month]" value="<?php echo $collection_item['target_current_month'];?>"></td>
-                                        <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_current_month]" value="<?php echo $collection_item['achievement_current_month'];?>"></td>
+                                        <td><input class="form-control budget_total integer_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>">
+                                        <td><input class="form-control achievement_total float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
+                                        <td><input type="text" class="form-control variance_total" value="<?php echo ($collection_item['budget_total']-$collection_item['achievement_total'])?>" disabled></td>
+                                        <td><input class="form-control target_last_month integer_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][target_last_month]" value="<?php echo $collection_item['target_last_month'];?>"></td>
+                                        <td><input class="form-control achievement_last_month float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_last_month]" value="<?php echo $collection_item['achievement_last_month'];?>"></td>
+                                        <td><input type="text" class="form-control variance_last_month" value="<?php echo ($collection_item['target_last_month']-$collection_item['achievement_last_month'])?>" disabled></td>
+                                        <td><input class="form-control target_current_month integer_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][target_current_month]" value="<?php echo $collection_item['target_current_month'];?>"></td>
+                                        <td><input class="form-control achievement_current_month float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_current_month]" value="<?php echo $collection_item['achievement_current_month'];?>"></td>
+                                        <td><input type="text" class="form-control variance_current_month" value="<?php echo ($collection_item['target_current_month']-$collection_item['achievement_current_month'])?>" disabled></td>
                                         <td><input class="form-control" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][target_next_month]" value="<?php echo $collection_item['target_next_month'];?>"></td>
                                         <td><textarea class="form-control" name="c_items[<?php echo $collection_item['zone_id'];?>][remarks_before_meeting]"><?php echo $collection_item['remarks_before_meeting'];?></textarea></td>
                                     <?php } ?>
@@ -303,5 +326,41 @@ $CI->load->view("action_buttons",$action_data);
                 $('#target_container').hide();
             }
         });
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function()
+    {
+        turn_off_triggers();
+        $(document).off('input','.achievement_total');
+        $(document).off('input','.budget_total');
+        $(document).off('input','.achievement_last_month');
+        $(document).off('input','.target_last_month');
+        $(document).off('input','.achievement_current_month');
+        $(document).off('input','.target_current_month');
+        $(".datepicker").datepicker({dateFormat : display_date_format});
+        $(document).on("input",".achievement_total,.budget_total",function()
+        {
+            var budget_total=$(this).closest('tr').find('.budget_total').val();
+            var achievement_total=$(this).closest('tr').find('.achievement_total').val();
+            var variance_total=budget_total-achievement_total;
+            $(this).closest('tr').find('.variance_total').val(variance_total);
+        });
+        $(document).on("input",".target_last_month,.achievement_last_month",function()
+        {
+            var target_last_month=$(this).closest('tr').find('.target_last_month').val();
+            var achievement_last_month=$(this).closest('tr').find('.achievement_last_month').val();
+            var variance_last_month=target_last_month-achievement_last_month;
+            $(this).closest('tr').find('.variance_last_month').val(variance_last_month);
+        });
+        $(document).on("input",".target_current_month,.achievement_current_month",function()
+        {
+            var target_current_month=$(this).closest('tr').find('.target_current_month').val();
+            var achievement_current_month=$(this).closest('tr').find('.achievement_current_month').val();
+            var variance_current_month=target_current_month-achievement_current_month;
+            $(this).closest('tr').find('.variance_current_month').val(variance_current_month);
+        });
+
     });
 </script>
