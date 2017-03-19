@@ -563,7 +563,7 @@ class Mm_agenda_di extends Root_Controller
             $div_id=$this->input->post('division_id');
             $id=$this->input->post('agenda_id');
             $this->db->select('ad.*');
-            $this->db->select('ah.purpose,ah.date');
+            $this->db->select('ah.purpose,ah.date agenda_date_hom');
             $this->db->from($this->config->item('table_mm_agenda_di').' ad');
             $this->db->join($this->config->item('table_mm_agenda_hom').' ah','ah.id = ad.agenda_id','LEFT');
             $this->db->where('ad.agenda_id',$id);
