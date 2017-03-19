@@ -209,6 +209,9 @@ class Mm_agenda_hom extends Root_Controller
             if(($this->input->post('id')))
             {
                 $id=$this->input->post('id');
+            }else
+            {
+                $id=$id;
             }
             $data['item']=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),'*',array('id ='.$id),1);
             $this->db->from($this->config->item('table_mm_agenda_hom_sales').' st');
@@ -368,7 +371,8 @@ class Mm_agenda_hom extends Root_Controller
         if ($this->db->trans_status() === TRUE)
         {
             $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
-            $this->system_list();
+            $this->system_details($id);
+//            $ajax['system_page_url']=site_url($this->controller_url.'/index/details/'.$id);
         }
         else
         {
@@ -428,7 +432,7 @@ class Mm_agenda_hom extends Root_Controller
         if ($this->db->trans_status() === TRUE)
         {
             $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
-            $this->system_list();
+            $this->system_details($id);
         }
         else
         {

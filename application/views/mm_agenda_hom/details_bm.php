@@ -3,7 +3,6 @@ $CI = & get_instance();
 $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
 $action_data["action_save"]='#save_form';
-$action_data["action_clear"]='#save_form';
 $CI->load->view("action_buttons",$action_data);
 ?>
 <form class="form_valid" id="save_form" action="<?php echo site_url($CI->controller_url.'/index/save_sales_bm');?>" method="post">
@@ -12,7 +11,7 @@ $CI->load->view("action_buttons",$action_data);
     <div class="row widget">
         <div class="widget-header">
             <div class="title">
-                <?php echo $title; ?>
+                <?php echo $title.' '.'(Before Meeting)'; ?>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -22,7 +21,7 @@ $CI->load->view("action_buttons",$action_data);
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a class="accordion-toggle external" data-toggle="collapse" data-target="#collapse1" href="#">
-                            Create Agenda</a>
+                            Agenda Information</a>
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
@@ -77,16 +76,16 @@ $CI->load->view("action_buttons",$action_data);
                                         <tr>
                                             <td><?php echo $sales_item['division_name'];?></td>
                                             <input type="hidden" name="sales_items[<?php echo $sales_item['division_id']?>][division_id]" value="<?php echo $sales_item['division_id'];?>"></td>
-                                            <td><input class="form-control budget_total integer_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
+                                            <td><input class="form-control budget_total float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
                                             <td><input class="form-control achievement_total float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
                                             <td><input type="text" class="form-control variance_total" value="<?php echo ($sales_item['budget_total']-$sales_item['achievement_total'])?>" disabled></td>
-                                            <td><input class="form-control target_last_month integer_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][target_last_month]" value="<?php echo $sales_item['target_last_month'];?>"></td>
+                                            <td><input class="form-control target_last_month float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][target_last_month]" value="<?php echo $sales_item['target_last_month'];?>"></td>
                                             <td><input class="form-control achievement_last_month float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][achievement_last_month]" value="<?php echo $sales_item['achievement_last_month'];?>"></td>
                                             <td><input type="text" class="form-control variance_last_month" value="<?php echo ($sales_item['target_last_month']-$sales_item['achievement_last_month'])?>" disabled></td>
-                                            <td><input class="form-control target_current_month integer_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][target_current_month]" value="<?php echo $sales_item['target_current_month'];?>"></td>
+                                            <td><input class="form-control target_current_month float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][target_current_month]" value="<?php echo $sales_item['target_current_month'];?>"></td>
                                             <td><input class="form-control achievement_current_month float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][achievement_current_month]" value="<?php echo $sales_item['achievement_current_month'];?>"></td>
                                             <td><input type="text" class="form-control variance_current_month" value="<?php echo ($sales_item['target_current_month']-$sales_item['achievement_current_month'])?>" disabled></td>
-                                            <td><input class="form-control" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][target_next_month]" value="<?php echo $sales_item['target_next_month'];?>"></td>
+                                            <td><input class="form-control float_type_positive" type="text" name="sales_items[<?php echo $sales_item['division_id']?>][target_next_month]" value="<?php echo $sales_item['target_next_month'];?>"></td>
                                             <td><textarea class="form-control" name="sales_items[<?php echo $sales_item['division_id']?>][remarks_before_meeting]"><?php echo $sales_item['remarks_before_meeting'];?></textarea></td>
                                         </tr>
                                         </tbody>
@@ -130,16 +129,16 @@ $CI->load->view("action_buttons",$action_data);
                                         <tr>
                                             <td><?php echo $collection_item['division_name'];?></td>
                                             <input type="hidden" name="collection_items[<?php echo $collection_item['division_id'];?>][division_id]" value="<?php echo $collection_item['division_id'];?>">
-                                            <td><input class="form-control budget_total integer_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>"></td>
+                                            <td><input class="form-control budget_total float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>"></td>
                                             <td><input class="form-control achievement_total float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
                                             <td><input type="text" class="form-control variance_total" value="<?php echo ($collection_item['budget_total']-$collection_item['achievement_total'])?>" disabled></td>
-                                            <td><input class="form-control target_last_month integer_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][target_last_month]" value="<?php echo $collection_item['target_last_month'];?>"></td>
+                                            <td><input class="form-control target_last_month float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][target_last_month]" value="<?php echo $collection_item['target_last_month'];?>"></td>
                                             <td><input class="form-control achievement_last_month float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][achievement_last_month]" value="<?php echo $collection_item['achievement_last_month'];?>"></td>
                                             <td><input type="text" class="form-control variance_last_month" value="<?php echo ($collection_item['target_last_month']-$collection_item['achievement_last_month'])?>" disabled></td>
-                                            <td><input class="form-control target_current_month integer_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][target_current_month]" value="<?php echo $collection_item['target_current_month'];?>"></td>
+                                            <td><input class="form-control target_current_month float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][target_current_month]" value="<?php echo $collection_item['target_current_month'];?>"></td>
                                             <td><input class="form-control achievement_current_month float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][achievement_current_month]" value="<?php echo $collection_item['achievement_current_month'];?>"></td>
                                             <td><input type="text" class="form-control variance_current_month" value="<?php echo ($collection_item['target_current_month']-$collection_item['achievement_current_month'])?>" disabled></td>
-                                            <td><input class="form-control" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][target_next_month]" value="<?php echo $collection_item['target_next_month'];?>"></td>
+                                            <td><input class="form-control float_type_positive" type="text" name="collection_items[<?php echo $collection_item['division_id'];?>][target_next_month]" value="<?php echo $collection_item['target_next_month'];?>"></td>
                                             <td><textarea class="form-control" name="collection_items[<?php echo $collection_item['division_id'];?>][remarks_before_meeting]"><?php echo $collection_item['remarks_before_meeting'];?></textarea></td>
                                         </tr>
                                         </tbody>
@@ -152,7 +151,7 @@ $CI->load->view("action_buttons",$action_data);
             </div>
             <div class="widget-header">
                 <div class="title">
-                    Forward
+                    Forward Agenda
                 </div>
                 <div class="clearfix"></div>
             </div>

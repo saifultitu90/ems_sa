@@ -3,16 +3,16 @@ $CI = & get_instance();
 $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
 $action_data["action_save"]='#save_form';
-$action_data["action_clear"]='#save_form';
+$action_data["action_refresh"]=base_url($CI->controller_url."/index/details/".$item['agenda_id']);
 $CI->load->view("action_buttons",$action_data);
 ?>
 <form class="form_valid" id="save_form" action="<?php echo site_url($CI->controller_url.'/index/save_im');?>" method="post">
-<input type="hidden" id="id" name="id" value="<?php echo $item['agenda_id']; ?>" />
+<input type="hidden" id="id" name="agenda_id" value="<?php echo $item['agenda_id']; ?>" />
 <input type="hidden" id="system_save_new_status" name="system_save_new_status" value="0" />
 <div class="row widget">
 <div class="widget-header">
     <div class="title">
-        <?php echo $title; ?>
+        <?php echo $title.' '.'(In Meeting)'; ?>
     </div>
     <div class="clearfix"></div>
 </div>
@@ -21,7 +21,7 @@ $CI->load->view("action_buttons",$action_data);
     <div class="panel-heading">
         <h4 class="panel-title">
             <a class="accordion-toggle external" data-toggle="collapse" data-target="#collapse1" href="#">
-                Agenda</a>
+                Agenda Information</a>
         </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse in">
@@ -103,7 +103,8 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
                                 <th>Current Month Variance</th>
-                                <th>Next Month Target Before Meeting</th>
+                                <th>Next Month Target(To HOM)</th>
+                                <th>Next Month Target(For ZI)</th>
                                 <th>Next Month Target In Meeting</th>
                                 <th>Remarks Before Meeting</th>
                                 <th>Remarks IN Meeting</th>
@@ -123,6 +124,7 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
                                     <td><b><?php echo ($s_item_hom['target_current_month']-$s_item_hom['achievement_current_month'])?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
                                     <td><?php echo $s_item_hom['target_next_month_im'];?></td>
                                     <td><b><?php echo $s_item_hom['remarks_before_meeting'];?></b></td>
@@ -144,6 +146,7 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><?php echo $s_item['achievement_current_month'];?></td>
                                     <td><?php echo ($s_item['target_current_month']-$s_item['achievement_current_month'])?></td>
                                     <td><?php echo $s_item['target_next_month'];?></td>
+                                    <td><?php echo $s_item['target_next_month_for_zi'];?></td>
                                     <td><?php echo $s_item['target_next_month_im'];?></td>
                                     <td><?php echo $s_item['remarks_before_meeting'];?></td>
                                     <td><textarea class="form-control" name="sitems[<?php echo $s_item['zone_id']?>][remarks_in_meeting]"><?php echo $s_item['remarks_in_meeting'];?></textarea></td>
@@ -180,7 +183,8 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
                                 <th>Current Month Variance</th>
-                                <th>Next Month Target Before Meeting</th>
+                                <th>Next Month Target(To HOM)</th>
+                                <th>Next Month Target(For ZI)</th>
                                 <th>Next Month Target In Meeting</th>
                                 <th>Remarks Before Meeting</th>
                                 <th>Remarks IN Meeting</th>
@@ -200,6 +204,7 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
                                     <td><b><?php echo ($c_item_hom['target_current_month']-$c_item_hom['achievement_current_month'])?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
                                     <td><?php echo $c_item_hom['target_next_month_im'];?></td>
                                     <td><b><?php echo $c_item_hom['remarks_before_meeting'];?></b></td>
@@ -221,6 +226,7 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><?php echo $c_item['achievement_current_month'];?></td>
                                     <td><?php echo ($c_item['target_current_month']-$c_item['achievement_current_month'])?></td>
                                     <td><?php echo $c_item['target_next_month'];?></td>
+                                    <td><?php echo $c_item['target_next_month_for_zi'];?></td>
                                     <td><?php echo $c_item['target_next_month_im'];?></td>
                                     <td><?php echo $c_item['remarks_before_meeting'];?></td>
                                     <td><input class="form-control" type="text" name="citems[<?php echo $c_item['zone_id']?>][remarks_in_meeting]" value="<?php echo $c_item['remarks_in_meeting'];?>"></td>
@@ -236,7 +242,7 @@ $CI->load->view("action_buttons",$action_data);
 </div>
 <div class="widget-header">
     <div class="title">
-        Complete
+        Complete Agenda
     </div>
     <div class="clearfix"></div>
 </div>

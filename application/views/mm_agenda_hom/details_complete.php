@@ -7,7 +7,7 @@ $CI->load->view("action_buttons",$action_data);
 <div class="row widget">
     <div class="widget-header">
         <div class="title">
-            <?php echo $title; ?>
+            <?php echo $title.' '.'(Completed)'; ?>
         </div>
         <div class="clearfix"></div>
     </div>

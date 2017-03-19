@@ -3,7 +3,7 @@ $CI = & get_instance();
 $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
 $action_data["action_save"]='#save_form';
-$action_data["action_clear"]='#save_form';
+$action_data["action_refresh"]=base_url($CI->controller_url."/index/details/".$item['id']);
 $CI->load->view("action_buttons",$action_data);
 ?>
 <form class="form_valid" id="save_form" action="<?php echo site_url($CI->controller_url.'/index/save_sales_im');?>" method="post">
@@ -12,7 +12,7 @@ $CI->load->view("action_buttons",$action_data);
     <div class="row widget">
         <div class="widget-header">
             <div class="title">
-                <?php echo $title; ?>
+                <?php echo $title.' '.'(In Meeting)'; ?>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -21,7 +21,7 @@ $CI->load->view("action_buttons",$action_data);
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a class="accordion-toggle external" data-toggle="collapse" data-target="#collapse1" href="#">
-                            Create Agenda</a>
+                            Agenda Information</a>
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
@@ -78,7 +78,7 @@ $CI->load->view("action_buttons",$action_data);
                                         <tr>
                                             <td><?php echo $sales_item['division_name'];?></td>
                                             <input type="hidden" name="sales_items[<?php echo $sales_item['division_id']?>][division_id]" value="<?php echo $sales_item['division_id'];?>"></td>
-                                            <td id="test"><?php echo $sales_item['budget_total'];?></td>
+                                            <td><?php echo $sales_item['budget_total'];?></td>
                                             <td><?php echo $sales_item['achievement_total'];?></td>
                                             <td><?php echo ($sales_item['budget_total']-$sales_item['achievement_total']);?></td>
                                             <td><?php echo $sales_item['target_last_month'];?></td>
@@ -159,7 +159,7 @@ $CI->load->view("action_buttons",$action_data);
             </div>
             <div class="widget-header">
                 <div class="title">
-                    Complete
+                    Complete Agenda
                 </div>
                 <div class="clearfix"></div>
             </div>

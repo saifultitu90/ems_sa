@@ -3,7 +3,6 @@ $CI = & get_instance();
 $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
 $action_data["action_save"]='#save_form';
-$action_data["action_clear"]='#save_form';
 $CI->load->view("action_buttons",$action_data);
 ?>
 <input type="hidden" id="agenda_id" name="agenda_id" value="<?php echo $agenda_id; ?>" />
@@ -49,7 +48,6 @@ $CI->load->view("action_buttons",$action_data);
                 </div>
             </div>
         </div>
-
         <div style="<?php if($div_id==0){echo 'display:none';} ?>" class="row show-grid" id="target_container">
 
         </div>
