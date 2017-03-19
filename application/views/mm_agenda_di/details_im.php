@@ -262,7 +262,6 @@ $CI->load->view("action_buttons",$action_data);
 <div class="clearfix"></div>
 </form>
 <script type="text/javascript">
-
     jQuery(document).ready(function()
     {
         turn_off_triggers();

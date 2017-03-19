@@ -27,6 +27,16 @@ $CI = & get_instance();
                 <label class="control-label"><?php echo $item['purpose'];?></label>
             </div>
         </div>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_DATE_MEETING');?><span>:</span></label>
+            </div>
+            <div class="col-xs-4">
+
+                <label class="control-label"><?php echo System_helper::display_date($item['agenda_date_hom']);?></label>
+
+            </div>
+        </div>
     </div>
 </div>
 <div class="panel panel-default">
@@ -86,7 +96,6 @@ $CI = & get_instance();
                                 <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
                                     <td><?php echo $sales_item['zone_name'];?></td>
                                     <input type="hidden" name="s_items[<?php echo $sales_item['zone_id'];?>][zone_id]" value="<?php echo $sales_item['zone_id'];?>"></td>
-                                    <!--<input type="hidden" name="sales_zone_id[]" value="--><?php //echo $sales_item['zone_id'];?><!--"></td>-->
                                     <td><input class="form-control budget_total float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
                                     <td><input class="form-control achievement_total float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
                                     <td><input type="text" class="form-control variance_total" value="<?php echo ($sales_item['budget_total']-$sales_item['achievement_total'])?>" disabled></td>
@@ -97,7 +106,6 @@ $CI = & get_instance();
                                     <td><input class="form-control achievement_current_month float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][achievement_current_month]" value="<?php echo $sales_item['achievement_current_month'];?>"></td>
                                     <td><input type="text" class="form-control variance_current_month" value="<?php echo ($sales_item['target_current_month']-$sales_item['achievement_current_month'])?>" disabled></td>
                                     <td><input type="text" class="form-control" value="<?php echo $sales_item['target_next_month'];?>" disabled></td>
-                                    <!--                                        <td>--><?php //echo $sales_item['target_next_month'];?><!--</td>-->
                                     <td><input class="form-control float_type_positive" type="text" name="s_items[<?php echo $sales_item['zone_id'];?>][target_next_month_for_zi]" value="<?php echo $sales_item['target_next_month_for_zi'];?>"></td>
                                     <td><textarea class="form-control" name="s_items[<?php echo $sales_item['zone_id']?>][remarks_before_meeting]"><?php echo $sales_item['remarks_before_meeting'];?></textarea></td>
                                 <?php } else{?>
@@ -181,7 +189,6 @@ $CI = & get_instance();
                                 <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
                                     <td><?php echo $collection_item['zone_name'];?></td>
                                     <input type="hidden" name="c_items[<?php echo $collection_item['zone_id'];?>][zone_id]" value="<?php echo $collection_item['zone_id'];?>"></td>
-                                    <!--<input type="hidden" name="collection_zone_id[]" value="--><?php //echo $collection_item['zone_id'];?><!--"></td>-->
                                     <td><input class="form-control budget_total float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>">
                                     <td><input class="form-control achievement_total float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
                                     <td><input type="text" class="form-control variance_total" value="<?php echo ($collection_item['budget_total']-$collection_item['achievement_total'])?>" disabled></td>
@@ -192,8 +199,6 @@ $CI = & get_instance();
                                     <td><input class="form-control achievement_current_month float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][achievement_current_month]" value="<?php echo $collection_item['achievement_current_month'];?>"></td>
                                     <td><input type="text" class="form-control variance_current_month" value="<?php echo ($collection_item['target_current_month']-$collection_item['achievement_current_month'])?>" disabled></td>
                                     <td><input type="text" class="form-control" value="<?php echo $collection_item['target_next_month'];?>" disabled></td>
-
-                                    <!--                                        <td>--><?php //echo $collection_item['target_next_month'];?><!--</td>-->
                                     <td><input class="form-control float_type_positive" type="text" name="c_items[<?php echo $collection_item['zone_id'];?>][target_next_month_for_zi]" value="<?php echo $collection_item['target_next_month_for_zi'];?>"></td>
                                     <td><textarea class="form-control" name="c_items[<?php echo $collection_item['zone_id'];?>][remarks_before_meeting]"><?php echo $collection_item['remarks_before_meeting'];?></textarea></td>
                                 <?php } else{?>
@@ -247,3 +252,5 @@ $CI = & get_instance();
         $(".datepicker").datepicker({dateFormat : display_date_format});
     });
 </script>
+
+

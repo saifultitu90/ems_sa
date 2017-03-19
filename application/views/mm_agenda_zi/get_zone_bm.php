@@ -28,6 +28,14 @@ $CI = & get_instance();
                 <label class="control-label"><?php echo $item['purpose'];?></label>
             </div>
         </div>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_DATE_MEETING');?><span>:</span></label>
+            </div>
+            <div class="col-xs-4">
+                <label class="control-label"><?php echo System_helper::display_date($item['date_di']);?></label>
+            </div>
+        </div>
     </div>
 </div>
 <div class="panel panel-default">

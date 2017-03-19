@@ -91,14 +91,12 @@ class Mm_agenda_di extends Root_Controller
                 $this->get_details($id);
             }
             $this->db->select('ad.*');
-            $this->db->select('ah.purpose');
+            $this->db->select('ah.purpose,ah.date agenda_date_hom');
             $this->db->from($this->config->item('table_mm_agenda_di').' ad');
             $this->db->join($this->config->item('table_mm_agenda_hom').' ah','ah.id = ad.agenda_id','LEFT');
             $this->db->where('ad.agenda_id',$id);
             $this->db->where('ad.division_id',$division_id);
             $data['item']=$this->db->get()->row_array();
-
-//            $data['item']=Query_helper::get_info($this->config->item('table_mm_agenda_di'),'*',array('agenda_id ='.$id,'division_id ='.$division_id),1);
             if(is_null($data['item']['date']))
             {
                 $data["item"]['date'] ='';
@@ -111,9 +109,7 @@ class Mm_agenda_di extends Root_Controller
             $this->db->where('st.division_id',$division_id);
             $this->db->where('st.revision', 1);
             $data['sales_items_hom']=$this->db->get()->result_array();
-
             $data['hom_meeting_status']=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),'*',array('id ='.$id),1);
-
             $data['sales_result']=Query_helper::get_info($this->config->item('table_mm_agenda_di_sales'),array('*'),array('agenda_id ='.$id,'division_id ='.$division_id));
             if($data['sales_result'])
             {
@@ -398,8 +394,6 @@ class Mm_agenda_di extends Root_Controller
                     foreach($sales_items as $zone_id=>$item)
                     {
                         $data=$item;
-//                        $data['agenda_id']=$agenda_id;
-//                        $data['division_id']=$div_id;
                         $data['user_updated'] = $user->user_id;
                         $data['date_updated'] = $time;
                         $this->db->where('agenda_id', $agenda_id);
@@ -407,7 +401,6 @@ class Mm_agenda_di extends Root_Controller
                         $this->db->where('zone_id', $zone_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_di_sales'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_sales'),$data);
                     }
                     $collection_items=$this->input->post('c_items');
                     foreach($collection_items as $zone_id=>$item)
@@ -420,7 +413,6 @@ class Mm_agenda_di extends Root_Controller
                         $this->db->where('zone_id', $zone_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_di_collection'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_collection'),$data);
                     }
                 }
                 else if(!($status_data['status_forward']) && ($data['hom_meeting_status']['status_complete']==$this->config->item('system_status_complete')))
@@ -430,8 +422,6 @@ class Mm_agenda_di extends Root_Controller
                     foreach($sales_items as $zone_id=>$item)
                     {
                         $data=$item;
-//                        $data['agenda_id']=$agenda_id;
-//                        $data['division_id']=$div_id;
                         $data['user_updated'] = $user->user_id;
                         $data['date_updated'] = $time;
                         $this->db->where('agenda_id', $agenda_id);
@@ -439,7 +429,6 @@ class Mm_agenda_di extends Root_Controller
                         $this->db->where('zone_id', $zone_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_di_sales'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_sales'),$data);
                     }
                     $collection_items=$this->input->post('c_items');
                     foreach($collection_items as $zone_id=>$item)
@@ -452,7 +441,6 @@ class Mm_agenda_di extends Root_Controller
                         $this->db->where('zone_id', $zone_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_di_collection'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_collection'),$data);
                     }
                     $data=$this->input->post('item');
                     $data['date']=System_helper::get_time($data['date']);
@@ -575,14 +563,12 @@ class Mm_agenda_di extends Root_Controller
             $div_id=$this->input->post('division_id');
             $id=$this->input->post('agenda_id');
             $this->db->select('ad.*');
-            $this->db->select('ah.purpose');
+            $this->db->select('ah.purpose,ah.date');
             $this->db->from($this->config->item('table_mm_agenda_di').' ad');
             $this->db->join($this->config->item('table_mm_agenda_hom').' ah','ah.id = ad.agenda_id','LEFT');
             $this->db->where('ad.agenda_id',$id);
             $this->db->where('ad.division_id',$div_id);
             $data['item']=$this->db->get()->row_array();
-//            print_r($data['item']);exit();
-            //$data['item']=Query_helper::get_info($this->config->item('table_mm_agenda_di'),'*',array('agenda_id ='.$id,'division_id ='.$div_id),1);
             if(is_null($data['item']['date']))
             {
                 $data['item']['date'] ='';
@@ -595,9 +581,7 @@ class Mm_agenda_di extends Root_Controller
             $this->db->where('st.division_id',$div_id);
             $this->db->where('st.revision', 1);
             $data['sales_items_hom']=$this->db->get()->result_array();
-
             $data['hom_meeting_status']=Query_helper::get_info($this->config->item('table_mm_agenda_hom'),'*',array('id ='.$id),1);
-
             $data['sales_result']=Query_helper::get_info($this->config->item('table_mm_agenda_di_sales'),'*',array('agenda_id ='.$id,'division_id ='.$div_id));
             if($data['sales_result'])
             {

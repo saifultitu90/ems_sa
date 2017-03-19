@@ -33,9 +33,6 @@ $CI->load->view("action_buttons",$action_data);
     {
         turn_off_triggers();
         var url = "<?php echo base_url($CI->controller_url.'/index/get_items');?>";
-        //alert(url);
-
-        // prepare the data
         var source =
         {
 
@@ -43,14 +40,13 @@ $CI->load->view("action_buttons",$action_data);
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'purpose', type: 'string' },
-                { name: 'date', type: 'string' },
+                { name: 'date_di', type: 'string' },
                 { name: 'status_forward', type: 'string' },
                 { name: 'status_complete', type: 'string' }
             ],
             id: 'id',
             url: url
         };
-
         var dataAdapter = new $.jqx.dataAdapter(source);
         // create jqxgrid.
         $("#system_jqx_container").jqxGrid(
@@ -69,7 +65,7 @@ $CI->load->view("action_buttons",$action_data);
                 autoheight: true,
                 columns: [
                     { text: '<?php echo $CI->lang->line('LABEL_PURPOSE'); ?>', dataField: 'purpose'},
-                    { text: '<?php echo $CI->lang->line('LABEL_DATE_AGENDA'); ?>', dataField: 'date'},
+                    { text: '<?php echo $CI->lang->line('LABEL_DATE_MEETING'); ?>', dataField: 'date_di'},
                     { text: '<?php echo $CI->lang->line('STATUS_FORWARD'); ?>', dataField: 'status_forward',filtertype: 'list',width:'150',cellsalign: 'right'},
                     { text: '<?php echo $CI->lang->line('STATUS_COMPLETE'); ?>', dataField: 'status_complete',filtertype: 'list',width:'150',cellsalign: 'right'}
                 ]

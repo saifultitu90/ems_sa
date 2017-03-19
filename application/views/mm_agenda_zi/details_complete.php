@@ -249,7 +249,6 @@ $CI->load->view("action_buttons",$action_data);
         $(".datepicker").datepicker({dateFormat : display_date_format});
         $(".dob").datepicker({dateFormat : display_date_format,changeMonth: true,changeYear: true,yearRange: "-100:+0"});
         $(":file").filestyle({input: false,buttonText: "<?php echo $CI->lang->line('UPLOAD');?>", buttonName: "btn-danger"});
-
     });
 </script>
 <script type="text/javascript">
@@ -258,7 +257,6 @@ $CI->load->view("action_buttons",$action_data);
         turn_off_triggers();
         $(document).on("change","#division_id",function()
         {
-//            $("#zone_id").val("");
             var division_id=$('#division_id').val();
             var agenda_id=$('#agenda_id').val();
             if(division_id>0)

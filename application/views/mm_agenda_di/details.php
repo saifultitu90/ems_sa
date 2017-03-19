@@ -58,10 +58,6 @@ $CI->load->view("action_buttons",$action_data);
 <script type="text/javascript">
     jQuery(document).ready(function()
     {
-
-        <!--        $(".datepicker").datepicker({dateFormat : display_date_format});-->
-        <!--        $(".dob").datepicker({dateFormat : display_date_format,changeMonth: true,changeYear: true,yearRange: "-100:+0"});-->
-        <!--        $(":file").filestyle({input: false,buttonText: "--><?php //echo $CI->lang->line('UPLOAD');?><!--", buttonName: "btn-danger"});-->
         turn_off_triggers();
         $(document).off('input','.achievement_total');
         $(document).off('input','.budget_total');
@@ -97,7 +93,6 @@ $CI->load->view("action_buttons",$action_data);
                 $('#target_container').hide();
             }
         });
-
         $(document).on("input",".achievement_total,.budget_total",function()
         {
             var budget_total=$(this).closest('tr').find('.budget_total').val();

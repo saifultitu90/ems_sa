@@ -78,6 +78,11 @@ class Mm_agenda_zi extends Root_Controller
             $this->db->where('agenda_zi.zone_id',$zone_id);
             $this->db->where('agenda_di.division_id',$division_id);
             $items=$this->db->get()->result_array();
+
+            foreach($items as &$item)
+            {
+                $item['date_di']=System_helper::display_date($item['date_di']);
+            }
         }
         elseif($division_id>0)
         {
@@ -85,6 +90,10 @@ class Mm_agenda_zi extends Root_Controller
             $this->db->where('agenda_di.division_id',$division_id);
             $this->db->group_by('agenda_di.agenda_id');
             $items=$this->db->get()->result_array();
+            foreach($items as &$item)
+            {
+                $item['date_di']=System_helper::display_date($item['date_di']);
+            }
         }
         else
         {
@@ -102,6 +111,10 @@ class Mm_agenda_zi extends Root_Controller
                         $temp[$result['agenda_id']]=true;
                     }
                 }
+            }
+            foreach($items as &$item)
+            {
+                $item['date_di']=System_helper::display_date($item['date_di']);
             }
         }
 
@@ -129,8 +142,10 @@ class Mm_agenda_zi extends Root_Controller
             }
             $this->db->select('az.*');
             $this->db->select('ah.purpose');
+            $this->db->select('agenda_di.date date_di');
             $this->db->from($this->config->item('table_mm_agenda_zi').' az');
             $this->db->join($this->config->item('table_mm_agenda_hom').' ah','ah.id = az.agenda_id','LEFT');
+            $this->db->join($this->config->item('table_mm_agenda_di').' agenda_di','agenda_di.agenda_id=az.agenda_id','INNER');
             $this->db->where('az.zone_id',$zone_id);
             $this->db->where('az.agenda_id',$id);
             $data['item']=$this->db->get()->row_array();
@@ -146,9 +161,7 @@ class Mm_agenda_zi extends Root_Controller
             $this->db->where('dist.zone_id',$zone_id);
             $this->db->where('dist.revision', 1);
             $data['s_items_di']=$this->db->get()->result_array();
-
             $data['di_meeting_status']=Query_helper::get_info($this->config->item('table_mm_agenda_di'),'*',array('agenda_id ='.$id,'division_id ='.$division_id),1);
-
             $data['sales_result']=Query_helper::get_info($this->config->item('table_mm_agenda_zi_sales'),array('*'),array('agenda_id ='.$id,'zone_id ='.$zone_id));
             if($data['sales_result'])
             {
@@ -160,8 +173,6 @@ class Mm_agenda_zi extends Root_Controller
                 $this->db->where('zist.zone_id',$zone_id);
                 $this->db->where('zist.revision', 1);
                 $data['sales_items']=$this->db->get()->result_array();
-//                print_r($data['sales_items']);
-//                exit;
             }
             else
             {
@@ -445,8 +456,6 @@ class Mm_agenda_zi extends Root_Controller
                     foreach($sales_items as $territory_id=>$item)
                     {
                         $data=$item;
-//                        $data['agenda_id']=$agenda_id;
-//                        $data['division_id']=$div_id;
                         $data['user_updated'] = $user->user_id;
                         $data['date_updated'] = $time;
                         $this->db->where('agenda_id', $agenda_id);
@@ -454,7 +463,6 @@ class Mm_agenda_zi extends Root_Controller
                         $this->db->where('territory_id', $territory_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_zi_sales'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_sales'),$data);
                     }
 
                     $collection_items=$this->input->post('c_items');
@@ -468,7 +476,6 @@ class Mm_agenda_zi extends Root_Controller
                         $this->db->where('territory_id', $territory_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_zi_collection'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_collection'),$data);
                     }
                 }
                 else if(!($status_data['status_forward']) && ($data['di_meeting_status']['status_complete']==$this->config->item('system_status_complete')))
@@ -477,8 +484,6 @@ class Mm_agenda_zi extends Root_Controller
                     foreach($sales_items as $territory_id=>$item)
                     {
                         $data=$item;
-//                        $data['agenda_id']=$agenda_id;
-//                        $data['division_id']=$div_id;
                         $data['user_updated'] = $user->user_id;
                         $data['date_updated'] = $time;
                         $this->db->where('agenda_id', $agenda_id);
@@ -486,9 +491,7 @@ class Mm_agenda_zi extends Root_Controller
                         $this->db->where('territory_id', $territory_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_zi_sales'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_sales'),$data);
                     }
-
                     $collection_items=$this->input->post('c_items');
                     foreach($collection_items as $territory_id=>$item)
                     {
@@ -500,9 +503,7 @@ class Mm_agenda_zi extends Root_Controller
                         $this->db->where('territory_id', $territory_id);
                         $this->db->where('revision', 1);
                         $this->db->update($this->config->item('table_mm_agenda_zi_collection'), $data);
-//                        Query_helper::add($this->config->item('table_mm_agenda_di_collection'),$data);
                     }
-
                     $data=$this->input->post('item');
                     $data['date']=System_helper::get_time($data['date']);
                     $data['user_updated'] = $user->user_id;
@@ -625,8 +626,10 @@ class Mm_agenda_zi extends Root_Controller
             $division_id=$this->input->post('division_id');
             $this->db->select('az.*');
             $this->db->select('ah.purpose');
+            $this->db->select('agenda_di.date date_di');
             $this->db->from($this->config->item('table_mm_agenda_zi').' az');
             $this->db->join($this->config->item('table_mm_agenda_hom').' ah','ah.id = az.agenda_id','LEFT');
+            $this->db->join($this->config->item('table_mm_agenda_di').' agenda_di','agenda_di.agenda_id=az.agenda_id','INNER');
             $this->db->where('az.zone_id',$zone_id);
             $this->db->where('az.agenda_id',$id);
             $data['item']=$this->db->get()->row_array();
@@ -642,9 +645,7 @@ class Mm_agenda_zi extends Root_Controller
             $this->db->where('dist.zone_id',$zone_id);
             $this->db->where('dist.revision', 1);
             $data['s_items_di']=$this->db->get()->result_array();
-
             $data['di_meeting_status']=Query_helper::get_info($this->config->item('table_mm_agenda_di'),'*',array('agenda_id ='.$id,'division_id ='.$division_id),1);
-
             $data['sales_result']=Query_helper::get_info($this->config->item('table_mm_agenda_zi_sales'),array('*'),array('agenda_id ='.$id,'zone_id ='.$zone_id));
             if($data['sales_result'])
             {
@@ -763,7 +764,6 @@ class Mm_agenda_zi extends Root_Controller
     }
     private function get_details($id)
     {
-
         $data['agenda_id']=$id;
         $data['title']="Agenda";
         $ajax['status']=true;
@@ -775,7 +775,6 @@ class Mm_agenda_zi extends Root_Controller
         $ajax['system_page_url']=site_url($this->controller_url.'/index/details/'.$id);
         $this->jsonReturn($ajax);
     }
-
     public function get_zone_by_division_id()
     {
         $agenda_id=$this->input->post('agenda_id');

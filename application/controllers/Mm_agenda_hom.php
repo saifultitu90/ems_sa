@@ -372,7 +372,6 @@ class Mm_agenda_hom extends Root_Controller
         {
             $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
             $this->system_details($id);
-//            $ajax['system_page_url']=site_url($this->controller_url.'/index/details/'.$id);
         }
         else
         {

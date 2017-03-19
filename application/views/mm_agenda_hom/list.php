@@ -33,9 +33,6 @@ $CI->load->view("action_buttons",$action_data);
     {
         turn_off_triggers();
         var url = "<?php echo base_url($CI->controller_url.'/index/get_items');?>";
-        //alert(url);
-
-        // prepare the data
         var source =
         {
 

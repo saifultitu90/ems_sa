@@ -237,9 +237,9 @@ $lang['LABEL_ACCOUNT_TYPE'] = 'Account Type';
 $lang['LABEL_CATEGORY'] = 'Category';
 $lang['LABEL_PIC_URL'] = 'Pic url';
 /** Label for meeting minutes/Agenda **/
-/** Created By Saiful **/
 $lang['LABEL_PURPOSE'] = 'Purpose';
 $lang['LABEL_DATE_AGENDA'] = 'Agenda Date';
+$lang['LABEL_DATE_MEETING'] = 'Meeting Date';
 $lang['LABEL_TOTAL_BUDGET'] = 'Total Budget';
 $lang['LABEL_LAST_TARGET'] = 'Last Target';
 $lang['LABEL_LAST_ACHIEVEMENT'] = 'Last Achievement';

@@ -242,7 +242,6 @@ $CI->load->view("action_buttons",$action_data);
 <div class="clearfix"></div>
 </form>
 <script type="text/javascript">
-
     jQuery(document).ready(function()
     {
         turn_off_triggers();
@@ -258,7 +257,6 @@ $CI->load->view("action_buttons",$action_data);
         turn_off_triggers();
         $(document).on("change","#division_id",function()
         {
-//            $("#zone_id").val("");
             var division_id=$('#division_id').val();
             var agenda_id=$('#agenda_id').val();
             if(division_id>0)

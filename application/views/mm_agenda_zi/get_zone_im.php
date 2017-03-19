@@ -16,7 +16,8 @@ $CI = & get_instance();
                 <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_DATE_AGENDA');?><span style="color:#FF0000">*</span></label>
             </div>
             <div class="col-sm-4 col-xs-8">
-                <input type="text" name="item[date]" id="date_stock_in" class="form-control datepicker" value="<?php echo System_helper::display_date($item['date']);?>"/>
+                <label class="control-label"><?php echo System_helper::display_date($item['date']);?></label>
+                <!--                    <input type="text" name="item[date]" id="date_stock_in" class="form-control datepicker" value="--><?php //echo System_helper::display_date($item['date']);?><!--"/>-->
             </div>
         </div>
         <div class="row show-grid">
@@ -94,7 +95,6 @@ $CI = & get_instance();
                                 <td><?php echo $s_item['target_current_month'];?></td>
                                 <td><?php echo $s_item['achievement_current_month'];?></td>
                                 <td><?php echo ($s_item['target_current_month']-$s_item['achievement_current_month'])?></td>
-                                <!--                                    <td>--><?php //echo $s_item['target_next_month'];?><!--</td>-->
                                 <td><?php echo $s_item['target_next_month'];?></td>
                                 <td><?php echo $s_item['target_next_month_for_ti'];?></td>
                                 <td><?php echo $s_item['target_next_month_im'];?></td>
@@ -174,7 +174,6 @@ $CI = & get_instance();
                                 <td><?php echo $c_item['target_current_month'];?></td>
                                 <td><?php echo $c_item['achievement_current_month'];?></td>
                                 <td><?php echo ($c_item['target_current_month']-$c_item['achievement_current_month'])?></td>
-                                <!--                                    <td>--><?php //echo $c_item['target_next_month'];?><!--</td>-->
                                 <td><?php echo $c_item['target_next_month'];?></td>
                                 <td><?php echo $c_item['target_next_month_for_ti'];?></td>
                                 <td><?php echo $c_item['target_next_month_im'];?></td>
