@@ -103,10 +103,10 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
                                 <th>Current Month Variance</th>
-                                <th>Next Month Target(To HOM)</th>
-                                <th>Next Month Target(For ZI)</th>
-                                <th>Next Month Target In Meeting</th>
-                                <th>Remarks Before Meeting</th>
+                                <th>Next Month Target</th>
+                                <th>Next Month Target(By ZI)</th>
+                                <th>Next Month Target In Meeting(By DI)</th>
+<!--                                <th>Remarks Before Meeting</th>-->
                                 <th>Remarks IN Meeting</th>
                             </tr>
                             </thead>
@@ -124,12 +124,11 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
                                     <td><b><?php echo ($s_item_hom['target_current_month']-$s_item_hom['achievement_current_month'])?></b></td>
-                                    <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
-                                    <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
-                                    <td><?php echo $s_item_hom['target_next_month_im'];?></td>
-                                    <td><b><?php echo $s_item_hom['remarks_before_meeting'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_next_month_im_by_hom'];?></b></td>
+                                    <td><?php echo $s_item_hom['target_next_month_im_by_hom'];?></td>
+                                    <td><?php echo $s_item_hom['target_next_month_im_by_hom'];?></td>
+<!--                                    <td><b>--><?php //echo $s_item_hom['remarks_before_meeting'];?><!--</b></td>-->
                                     <td><?php echo $s_item_hom['remarks_in_meeting'];?></td>
-
                                 </tr>
                             <?php } ?>
                             <?php foreach($sales_items as $s_item){?>
@@ -145,10 +144,10 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><?php echo $s_item['target_current_month'];?></td>
                                     <td><?php echo $s_item['achievement_current_month'];?></td>
                                     <td><?php echo ($s_item['target_current_month']-$s_item['achievement_current_month'])?></td>
-                                    <td><?php echo $s_item['target_next_month'];?></td>
                                     <td><?php echo $s_item['target_next_month_for_zi'];?></td>
                                     <td><?php echo $s_item['target_next_month_im'];?></td>
-                                    <td><?php echo $s_item['remarks_before_meeting'];?></td>
+                                    <td><input class="form-control float_type_positive" type="text" name="sitems[<?php echo $s_item['zone_id']?>][target_next_month_im_by_di]" value="<?php echo $s_item['target_next_month_im_by_di'];?>"></td>
+<!--                                    <td>--><?php //echo $s_item['remarks_before_meeting'];?><!--</td>-->
                                     <td><textarea class="form-control" name="sitems[<?php echo $s_item['zone_id']?>][remarks_in_meeting]"><?php echo $s_item['remarks_in_meeting'];?></textarea></td>
                                 </tr>
                             <?php } ?>
@@ -183,10 +182,10 @@ $CI->load->view("action_buttons",$action_data);
                                 <th>Current Month Target</th>
                                 <th>Current Month Achievement</th>
                                 <th>Current Month Variance</th>
-                                <th>Next Month Target(To HOM)</th>
-                                <th>Next Month Target(For ZI)</th>
-                                <th>Next Month Target In Meeting</th>
-                                <th>Remarks Before Meeting</th>
+                                <th>Next Month Target</th>
+                                <th>Next Month Target(By ZI)</th>
+                                <th>Next Month Target In Meeting(By DI)</th>
+<!--                                <th>Remarks Before Meeting</th>-->
                                 <th>Remarks IN Meeting</th>
                             </tr>
                             </thead>
@@ -204,10 +203,10 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                     <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
                                     <td><b><?php echo ($c_item_hom['target_current_month']-$c_item_hom['achievement_current_month'])?></b></td>
-                                    <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
-                                    <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
-                                    <td><?php echo $c_item_hom['target_next_month_im'];?></td>
-                                    <td><b><?php echo $c_item_hom['remarks_before_meeting'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_next_month_im_by_hom'];?></b></td>
+                                    <td><?php echo $c_item_hom['target_next_month_im_by_hom'];?></td>
+                                    <td><?php echo $c_item_hom['target_next_month_im_by_hom'];?></td>
+<!--                                    <td><b>--><?php //echo $c_item_hom['remarks_before_meeting'];?><!--</b></td>-->
                                     <td><?php echo $c_item_hom['remarks_in_meeting'];?></td>
 
                                 </tr>
@@ -225,10 +224,10 @@ $CI->load->view("action_buttons",$action_data);
                                     <td><?php echo $c_item['target_current_month'];?></td>
                                     <td><?php echo $c_item['achievement_current_month'];?></td>
                                     <td><?php echo ($c_item['target_current_month']-$c_item['achievement_current_month'])?></td>
-                                    <td><?php echo $c_item['target_next_month'];?></td>
                                     <td><?php echo $c_item['target_next_month_for_zi'];?></td>
                                     <td><?php echo $c_item['target_next_month_im'];?></td>
-                                    <td><?php echo $c_item['remarks_before_meeting'];?></td>
+                                    <td><input class="form-control float_type_positive" type="text" name="citems[<?php echo $c_item['zone_id']?>][target_next_month_im_by_di]" value="<?php echo $c_item['target_next_month_im_by_di'];?>"></td>
+<!--                                    <td>--><?php //echo $c_item['remarks_before_meeting'];?><!--</td>-->
                                     <td><input class="form-control" type="text" name="citems[<?php echo $c_item['zone_id']?>][remarks_in_meeting]" value="<?php echo $c_item['remarks_in_meeting'];?>"></td>
                                 </tr>
                             <?php } ?>

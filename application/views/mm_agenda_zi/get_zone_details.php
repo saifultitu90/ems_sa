@@ -48,9 +48,10 @@
                             <th>Current Month Target</th>
                             <th>Current Month Achievement</th>
                             <th>Current Month Variance</th>
-                            <th>Next Month Target(To DI)</th>
+                            <th>Next Month Target IM(To DI)</th>
                             <th>Next Month Target BM(For TI)</th>
-                            <th>Next Month Target In Meeting</th>
+                            <th>Next Month Target IM(By TI)</th>
+                            <th>Next Month Target IM(By ZI)</th>
                             <th>Remarks Before Meeting</th>
                             <th>Remarks IN Meeting</th>
                         </tr>
@@ -68,31 +69,33 @@
                                 <td><b><?php echo $s_item_di['target_current_month'];?></b></td>
                                 <td><b><?php echo $s_item_di['achievement_current_month'];?></b></td>
                                 <td><b><?php echo ($s_item_di['target_current_month']-$s_item_di['achievement_current_month'])?></b></td>
-                                <td><b><?php echo $s_item_di['target_next_month'];?></b></td>
-                                <td><b><?php echo $s_item_di['target_next_month'];?></b></td>
-                                <td><?php echo $s_item_di['target_next_month_im'];?></td>
+                                <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
+                                <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
+                                <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
+                                <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
                                 <td><b><?php echo $s_item_di['remarks_before_meeting'];?></b></td>
                                 <td><?php echo $s_item_di['remarks_in_meeting'];?></td>
 
                             </tr>
                         <?php } ?>
-                        <?php foreach($sales_items as $s_item){?>
+                        <?php foreach($sales_items as $sales_item){?>
                             <tr>
-                                <td><?php echo $s_item['territory_name'];?></td>
-                                <td><?php echo $s_item['budget_total'];?></td>
-                                <td><?php echo $s_item['achievement_total'];?></td>
-                                <td><?php echo ($s_item['budget_total']-$s_item['achievement_total'])?></td>
-                                <td><?php echo $s_item['target_last_month'];?></td>
-                                <td><?php echo $s_item['achievement_last_month'];?></td>
-                                <td><?php echo ($s_item['target_last_month']-$s_item['achievement_last_month'])?></td>
-                                <td><?php echo $s_item['target_current_month'];?></td>
-                                <td><?php echo $s_item['achievement_current_month'];?></td>
-                                <td><?php echo ($s_item['target_current_month']-$s_item['achievement_current_month'])?></td>
-                                <td><?php echo $s_item['target_next_month'];?></td>
-                                <td><?php echo $s_item['target_next_month_for_ti'];?></td>
-                                <td><?php echo $s_item['target_next_month_im'];?></td>
-                                <td><?php echo $s_item['remarks_before_meeting'];?></td>
-                                <td><?php echo $s_item['remarks_in_meeting'];?></td>
+                                <td><?php echo $sales_item['territory_name'];?></td>
+                                <td><?php echo $sales_item['budget_total'];?></td>
+                                <td><?php echo $sales_item['achievement_total'];?></td>
+                                <td><?php echo ($sales_item['budget_total']-$sales_item['achievement_total'])?></td>
+                                <td><?php echo $sales_item['target_last_month'];?></td>
+                                <td><?php echo $sales_item['achievement_last_month'];?></td>
+                                <td><?php echo ($sales_item['target_last_month']-$sales_item['achievement_last_month'])?></td>
+                                <td><?php echo $sales_item['target_current_month'];?></td>
+                                <td><?php echo $sales_item['achievement_current_month'];?></td>
+                                <td><?php echo ($sales_item['target_current_month']-$sales_item['achievement_current_month'])?></td>
+                                <td><?php echo $sales_item['target_next_month'];?></td>
+                                <td><?php echo $sales_item['target_next_month_for_ti'];?></td>
+                                <td><?php echo $sales_item['target_next_month_im'];?></td>
+                                <td><?php echo $sales_item['target_next_month_im_by_zi'];?></td>
+                                <td><?php echo $sales_item['remarks_before_meeting'];?></td>
+                                <td><?php echo $sales_item['remarks_in_meeting'];?></td>
                             </tr>
                         <?php } ?>
                         </tbody>
@@ -126,9 +129,10 @@
                             <th>Current Month Target</th>
                             <th>Current Month Achievement</th>
                             <th>Current Month Variance</th>
-                            <th>Next Month Target BM(To HOM)</th>
-                            <th>Next Month Target BM(For ZI)</th>
-                            <th>Next Month Target In Meeting</th>
+                            <th>Next Month Target IM(To DI)</th>
+                            <th>Next Month Target BM(For TI)</th>
+                            <th>Next Month Target IM(By TI)</th>
+                            <th>Next Month Target IM(By ZI)</th>
                             <th>Remarks Before Meeting</th>
                             <th>Remarks IN Meeting</th>
                         </tr>
@@ -137,6 +141,7 @@
                         <?php foreach($c_items_di as $c_item_di){?>
                             <tr>
                                 <td><b><?php echo $c_item_di['zone_name'];?></b></td>
+                                <input type="hidden" name="collection_zone_id" value="<?php echo $c_item_di['zone_id'];?>">
                                 <td><b><?php echo $c_item_di['budget_total'];?></b></td>
                                 <td><b><?php echo $c_item_di['achievement_total'];?></b></td>
                                 <td><b><?php echo ($c_item_di['budget_total']-$c_item_di['achievement_total'])?></b></td>
@@ -146,30 +151,33 @@
                                 <td><b><?php echo $c_item_di['target_current_month'];?></b></td>
                                 <td><b><?php echo $c_item_di['achievement_current_month'];?></b></td>
                                 <td><b><?php echo ($c_item_di['target_current_month']-$c_item_di['achievement_current_month'])?></b></td>
-                                <td><b><?php echo $c_item_di['target_next_month'];?></b></td>
-                                <td><b><?php echo $c_item_di['target_next_month'];?></b></td>
-                                <td><?php echo $c_item_di['target_next_month_im'];?></td>
+                                <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
+                                <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
+                                <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
+                                <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
                                 <td><b><?php echo $c_item_di['remarks_before_meeting'];?></b></td>
                                 <td><?php echo $c_item_di['remarks_in_meeting'];?></td>
                             </tr>
                         <?php } ?>
-                        <?php foreach($collection_items as $c_item){?>
+                        <?php foreach($collection_items as $collection_item){?>
                             <tr>
-                                <td><?php echo $c_item['territory_name'];?></td>
-                                <td><?php echo $c_item['budget_total'];?></td>
-                                <td><?php echo $c_item['achievement_total'];?></td>
-                                <td><?php echo ($c_item['budget_total']-$c_item['achievement_total'])?></td>
-                                <td><?php echo $c_item['target_last_month'];?></td>
-                                <td><?php echo $c_item['achievement_last_month'];?></td>
-                                <td><?php echo ($c_item['target_last_month']-$c_item['achievement_last_month'])?></td>
-                                <td><?php echo $c_item['target_current_month'];?></td>
-                                <td><?php echo $c_item['achievement_current_month'];?></td>
-                                <td><?php echo ($c_item['target_current_month']-$c_item['achievement_current_month'])?></td>
-                                <td><?php echo $c_item['target_next_month'];?></td>
-                                <td><?php echo $c_item['target_next_month_for_ti'];?></td>
-                                <td><?php echo $c_item['target_next_month_im'];?></td>
-                                <td><?php echo $c_item['remarks_before_meeting'];?></td>
-                                <td><?php echo $c_item['remarks_in_meeting'];?></td>
+                                <td><?php echo $collection_item['territory_name'];?></td>
+                                <input type="hidden" name="citems[<?php echo $collection_item['territory_id']?>][zone_id]" value="<?php echo $collection_item['territory_id'];?>"></td>
+                                <td><?php echo $collection_item['budget_total'];?></td>
+                                <td><?php echo $collection_item['achievement_total'];?></td>
+                                <td><?php echo ($collection_item['budget_total']-$collection_item['achievement_total'])?></td>
+                                <td><?php echo $collection_item['target_last_month'];?></td>
+                                <td><?php echo $collection_item['achievement_last_month'];?></td>
+                                <td><?php echo ($collection_item['target_last_month']-$collection_item['achievement_last_month'])?></td>
+                                <td><?php echo $collection_item['target_current_month'];?></td>
+                                <td><?php echo $collection_item['achievement_current_month'];?></td>
+                                <td><?php echo ($collection_item['target_current_month']-$collection_item['achievement_current_month'])?></td>
+                                <td><?php echo $collection_item['target_next_month'];?></td>
+                                <td><?php echo $collection_item['target_next_month_for_ti'];?></td>
+                                <td><?php echo $collection_item['target_next_month_im'];?></td>
+                                <td><?php echo $collection_item['target_next_month_im_by_zi'];?></td>
+                                <td><?php echo $collection_item['remarks_before_meeting'];?></td>
+                                <td><?php echo $collection_item['remarks_in_meeting'];?></td>
                             </tr>
                         <?php } ?>
                         </tbody>

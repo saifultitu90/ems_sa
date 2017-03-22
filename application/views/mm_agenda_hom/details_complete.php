@@ -64,7 +64,8 @@ $CI->load->view("action_buttons",$action_data);
                                     <th>Current Month Achievement</th>
                                     <th>Current Month Variance</th>
                                     <th>Next Month Target Before Meeting</th>
-                                    <th>Next Month Target In Meeting</th>
+                                    <th>Next Month Target(By DI)</th>
+                                    <th>Next Month Target In Meeting(By HOM)</th>
                                     <th>Remarks Before Meeting</th>
                                     <th>Remarks IN Meeting</th>
                                 </tr>
@@ -85,6 +86,7 @@ $CI->load->view("action_buttons",$action_data);
                                         <td><?php echo ($sales_item['target_current_month']-$sales_item['achievement_current_month'])?></td>
                                         <td><?php echo $sales_item['target_next_month'];?></td>
                                         <td><?php echo $sales_item['target_next_month_im'];?></td>
+                                        <td><?php echo $sales_item['target_next_month_im_by_hom'];?></td>
                                         <td><?php echo $sales_item['remarks_before_meeting'];?></td>
                                         <td><?php echo $sales_item['remarks_in_meeting'];?></td>
                                     </tr>
@@ -121,7 +123,8 @@ $CI->load->view("action_buttons",$action_data);
                                     <th>Current Month Achievement</th>
                                     <th>Current Month Variance</th>
                                     <th>Next Month Target Before Meeting</th>
-                                    <th>Next Month Target In Meeting</th>
+                                    <th>Next Month Target(By DI)</th>
+                                    <th>Next Month Target In Meeting(By HOM)</th>
                                     <th>Remarks Before Meeting</th>
                                     <th>Remarks IN Meeting</th>
                                 </tr>
@@ -142,6 +145,7 @@ $CI->load->view("action_buttons",$action_data);
                                         <td><?php echo ($collection_item['target_current_month']-$collection_item['achievement_current_month'])?></td>
                                         <td><?php echo $collection_item['target_next_month'];?></td>
                                         <td><?php echo $collection_item['target_next_month_im'];?></td>
+                                        <td><?php echo $collection_item['target_next_month_im_by_hom'];?></td>
                                         <td><?php echo $collection_item['remarks_before_meeting'];?></td>
                                         <td><?php echo $collection_item['remarks_in_meeting'];?></td>
                                     </tr>

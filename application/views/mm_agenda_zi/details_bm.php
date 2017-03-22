@@ -4,6 +4,7 @@ $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
 $action_data["action_save"]='#save_form';
 $action_data["action_refresh"]=base_url($CI->controller_url."/index/details/".$item['agenda_id']);
+
 $CI->load->view("action_buttons",$action_data);
 ?>
 <form class="form_valid" id="save_form" action="<?php echo site_url($CI->controller_url.'/index/save');?>" method="post">
@@ -17,6 +18,7 @@ $CI->load->view("action_buttons",$action_data);
     </div>
     <div class="clearfix"></div>
 </div>
+
 <div class="panel-group" id="accordion">
 <?php if($div_id==0){?>
     <div class="panel panel-default">
@@ -84,7 +86,9 @@ $CI->load->view("action_buttons",$action_data);
                     <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_DATE_MEETING');?><span>:</span></label>
                 </div>
                 <div class="col-xs-4">
+
                     <label class="control-label"><?php echo System_helper::display_date($item['date_di']);?></label>
+
                 </div>
             </div>
 
@@ -123,6 +127,7 @@ $CI->load->view("action_buttons",$action_data);
                             <th>Remarks Before Meeting</th>
                         </tr>
                         </thead>
+
                         <tbody>
                         <?php foreach($s_items_di as $s_item_di){?>
                             <tr>
@@ -137,18 +142,46 @@ $CI->load->view("action_buttons",$action_data);
                                 <td><b><?php echo $s_item_di['target_current_month'];?></b></td>
                                 <td><b><?php echo $s_item_di['achievement_current_month'];?></b></td>
                                 <td><b><?php echo ($s_item_di['target_current_month']-$s_item_di['achievement_current_month']);?></b></td>
-                                <td><b><?php echo $s_item_di['target_next_month'];?></b></td>
                                 <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
-                                    <td><b><?php echo $s_item_di['target_next_month'];?></b></td>
+                                    <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
+                                <?php }else{?>
+                                    <td><b><?php echo $s_item_di['target_next_month_for_zi'].' <br>'.'(Before Meeting)';?></b></td>
+                                <?php } ?>
+                                <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                    <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
                                 <?php } ?>
                                 <td><b><?php echo $s_item_di['remarks_before_meeting'];?></b></td>
                             </tr>
+                        <?php } ?>
+                        <?php if(!($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                            <?php foreach($s_items_di as $s_item_di){?>
+                                <tr>
+                                    <td><b><?php echo $s_item_di['zone_name'];?></b></td>
+                                    <input type="hidden" name="sales_zone_id" value="<?php echo $s_item_di['zone_id'];?>"></td>
+                                    <td><b><?php echo $s_item_di['budget_total'];?></b></td>
+                                    <td><b><?php echo $s_item_di['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($s_item_di['budget_total']-$s_item_di['achievement_total']);?></b></td>
+                                    <td><b><?php echo $s_item_di['target_last_month'];?></b></td>
+                                    <td><b><?php echo $s_item_di['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_di['target_last_month']-$s_item_di['achievement_last_month']);?></b></td>
+                                    <td><b><?php echo $s_item_di['target_current_month'];?></b></td>
+                                    <td><b><?php echo $s_item_di['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_di['target_current_month']-$s_item_di['achievement_current_month']);?></b></td>
+                                    <td><b><?php echo $s_item_di['target_next_month_im_by_di'].' <br>'.'(In Meeting)';?></b></td>
+                                    <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                        <td><b><?php echo $s_item_di['target_next_month_im_by_di'];?></b></td>
+                                    <?php } ?>
+                                    <td><b><?php echo $s_item_di['remarks_before_meeting'];?></b></td>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
                         <?php foreach($sales_items as $sales_item){?>
                             <tr>
                                 <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
                                     <td><?php echo $sales_item['territory_name'];?></td>
                                     <input type="hidden" name="s_items[<?php echo $sales_item['territory_id'];?>][territory_id]" value="<?php echo $sales_item['territory_id'];?>"></td>
+
+                                    <!--                                        <input type="hidden" name="sales_territory_id[]" value="--><?php //echo $sales_item['territory_id'];?><!--"></td>-->
                                     <td><input class="form-control budget_total float_type_positive" type="text" name="s_items[<?php echo $sales_item['territory_id'];?>][budget_total]" value="<?php echo $sales_item['budget_total'];?>">
                                     <td><input class="form-control achievement_total float_type_positive" type="text" name="s_items[<?php echo $sales_item['territory_id'];?>][achievement_total]" value="<?php echo $sales_item['achievement_total'];?>"></td>
                                     <td><input type="text" class="form-control variance_total" value="<?php echo ($sales_item['budget_total']-$sales_item['achievement_total'])?>" disabled></td>
@@ -230,18 +263,46 @@ $CI->load->view("action_buttons",$action_data);
                                 <td><b><?php echo $c_item_di['target_current_month'];?></b></td>
                                 <td><b><?php echo $c_item_di['achievement_current_month'];?></b></td>
                                 <td><b><?php echo ($c_item_di['target_current_month']-$c_item_di['achievement_current_month'])?></b></td>
-                                <td><b><?php echo $c_item_di['target_next_month'];?></b></td>
                                 <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
-                                    <td><b><?php echo $c_item_di['target_next_month'];?></b></td>
+                                    <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
+                                <?php }else{?>
+                                    <td><b><?php echo $c_item_di['target_next_month_for_zi'].' <br>'.'(Before Meeting)';?></b></td>
+                                <?php } ?>
+                                <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                    <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
                                 <?php } ?>
                                 <td><b><?php echo $c_item_di['remarks_before_meeting'];?></b></td>
                             </tr>
+                        <?php } ?>
+                        <?php if(!($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                            <?php foreach($c_items_di as $c_item_di){?>
+                                <tr>
+                                    <td><b><?php echo $c_item_di['zone_name'];?></b></td>
+                                    <input type="hidden" name="collection_zone_id" value="<?php echo $c_item_di['zone_id'];?>">
+                                    <td><b><?php echo $c_item_di['budget_total'];?></b></td>
+                                    <td><b><?php echo $c_item_di['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($c_item_di['budget_total']-$c_item_di['achievement_total'])?></b></td>
+                                    <td><b><?php echo $c_item_di['target_last_month'];?></b></td>
+                                    <td><b><?php echo $c_item_di['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_di['target_last_month']-$c_item_di['achievement_last_month'])?></b></td>
+                                    <td><b><?php echo $c_item_di['target_current_month'];?></b></td>
+                                    <td><b><?php echo $c_item_di['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_di['target_current_month']-$c_item_di['achievement_current_month'])?></b></td>
+                                    <td><b><?php echo $c_item_di['target_next_month_im_by_di'].' '.'(In Meeting)';?></b></td>
+                                    <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                        <td><b><?php echo $c_item_di['target_next_month_im_by_di'];?></b></td>
+                                    <?php } ?>
+                                    <td><b><?php echo $c_item_di['remarks_before_meeting'];?></b></td>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
                         <?php foreach($collection_items as $collection_item){?>
                             <tr>
                                 <?php if(($di_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
                                     <td><?php echo $collection_item['territory_name'];?></td>
                                     <input type="hidden" name="c_items[<?php echo $collection_item['territory_id'];?>][territory_id]" value="<?php echo $collection_item['territory_id'];?>"></td>
+
+                                    <!--                                        <input type="hidden" name="collection_territory_id[]" value="--><?php //echo $collection_item['territory_id'];?><!--"></td>-->
                                     <td><input class="form-control budget_total float_type_positive" type="text" name="c_items[<?php echo $collection_item['territory_id'];?>][budget_total]" value="<?php echo $collection_item['budget_total'];?>">
                                     <td><input class="form-control achievement_total float_type_positive" type="text" name="c_items[<?php echo $collection_item['territory_id'];?>][achievement_total]" value="<?php echo $collection_item['achievement_total'];?>"></td>
                                     <td><input type="text" class="form-control variance_total" value="<?php echo ($collection_item['budget_total']-$collection_item['achievement_total'])?>" disabled></td>
@@ -311,6 +372,7 @@ $CI->load->view("action_buttons",$action_data);
 
     });
 </script>
+
 <script type="text/javascript">
     jQuery(document).ready(function()
     {
@@ -323,6 +385,8 @@ $CI->load->view("action_buttons",$action_data);
             {
                 $('#target_container').show();
                 $('#agenda_info_container').show();
+
+
                 $.ajax({
                     url: base_url+"mm_agenda_di/get_zone/",
                     type: 'POST',

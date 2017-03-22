@@ -124,7 +124,6 @@ $CI->load->view("action_buttons",$action_data);
                             <th>Remarks Before Meeting</th>
                         </tr>
                         </thead>
-
                         <tbody>
                         <?php foreach($sales_items_hom as $s_item_hom){?>
                             <tr>
@@ -139,13 +138,39 @@ $CI->load->view("action_buttons",$action_data);
                                 <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
                                 <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
                                 <td><b><?php echo ($s_item_hom['target_current_month']-$s_item_hom['achievement_current_month']);?></b></td>
-                                <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
                                 <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
-                                    <td><b><?php echo $s_item_hom['target_next_month'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_next_month_im_by_hom'];?></b></td>
+                                <?php }else{ ?>
+                                    <td><b><?php echo $s_item_hom['target_next_month'].' <br>'.'(Before Meeting)';?></b></td>
+                                <?php } ?>
+                                <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                    <td><b><?php echo $s_item_hom['target_next_month_im_by_hom'];?></b></td>
                                 <?php } ?>
                                 <td><b><?php echo $s_item_hom['remarks_before_meeting'];?></b></td>
                             </tr>
                         <?php } ?>
+                        <?php if(!($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                            <?php foreach($sales_items_hom as $s_item_hom){?>
+                                <tr>
+                                    <td><b><?php echo $s_item_hom['division_name'];?></b></td>
+                                    <input type="hidden" name="sales_division_id" value="<?php echo $s_item_hom['division_id'];?>"></td>
+                                    <td><b><?php echo $s_item_hom['budget_total'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['budget_total']-$s_item_hom['achievement_total']);?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_last_month'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['target_last_month']-$s_item_hom['achievement_last_month']);?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_current_month'];?></b></td>
+                                    <td><b><?php echo $s_item_hom['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($s_item_hom['target_current_month']-$s_item_hom['achievement_current_month']);?></b></td>
+                                    <td><b><?php echo $s_item_hom['target_next_month_im_by_hom'].' '.'(In Meeting)';?></b></td>
+                                    <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                        <td><b><?php echo $s_item_hom['target_next_month_im_by_hom'].' '.'(In Meeting)';?></b></td>
+                                    <?php } ?>
+                                    <td><b><?php echo $s_item_hom['remarks_before_meeting'];?></b></td>
+                                </tr>
+                            <?php } ?>
+                       <?php } ?>
                         <?php foreach($sales_items as $sales_item){?>
                             <tr>
                                 <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
@@ -233,12 +258,39 @@ $CI->load->view("action_buttons",$action_data);
                                 <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
                                 <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
                                 <td><b><?php echo ($c_item_hom['target_current_month']-$c_item_hom['achievement_current_month'])?></b></td>
-                                <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
                                 <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
-                                    <td><b><?php echo $c_item_hom['target_next_month'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_next_month_im_by_hom'];?></b></td>
+                                <?php }else{ ?>
+                                    <td><b><?php echo $c_item_hom['target_next_month'].' <br>'.'(Before Meeting)';?></b></td>
+                                <?php } ?>
+                                <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                    <td><b><?php echo $c_item_hom['target_next_month_im_by_hom'];?></b></td>
                                 <?php } ?>
                                 <td><b><?php echo $c_item_hom['remarks_before_meeting'];?></b></td>
                             </tr>
+                        <?php } ?>
+                        <?php if(!($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                            <?php foreach($collection_items_hom as $c_item_hom){?>
+                                <tr>
+                                    <td><b><?php echo $c_item_hom['division_name'];?></b></td>
+                                    <input type="hidden" name="collection_division_id" value="<?php echo $c_item_hom['division_id'];?>">
+                                    <td><b><?php echo $c_item_hom['budget_total'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['achievement_total'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['budget_total']-$c_item_hom['achievement_total'])?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_last_month'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['achievement_last_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['target_last_month']-$c_item_hom['achievement_last_month'])?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_current_month'];?></b></td>
+                                    <td><b><?php echo $c_item_hom['achievement_current_month'];?></b></td>
+                                    <td><b><?php echo ($c_item_hom['target_current_month']-$c_item_hom['achievement_current_month'])?></b></td>
+                                    <td><b><?php echo $c_item_hom['target_next_month_im_by_hom'].' '.'(In Meeting)';?></b></td>
+
+                                    <?php if(($hom_meeting_status['status_complete']==$this->config->item('system_status_complete'))){?>
+                                        <td><b><?php echo $c_item_hom['target_next_month_im_by_hom'].' '.'(In Meeting)';?></b></td>
+                                    <?php } ?>
+                                    <td><b><?php echo $c_item_hom['remarks_before_meeting'];?></b></td>
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
                         <?php foreach($collection_items as $collection_item){?>
                             <tr>

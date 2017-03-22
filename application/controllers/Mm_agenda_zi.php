@@ -153,6 +153,8 @@ class Mm_agenda_zi extends Root_Controller
             {
                 $data["item"]['date'] ='';
             }
+//            print_r($data['item']);
+//            exit;
             $this->db->from($this->config->item('table_mm_agenda_di_sales').' dist');
             $this->db->select('dist.*');
             $this->db->select('zones.name zone_name');
