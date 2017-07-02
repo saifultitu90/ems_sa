@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/ems_sa/';
+$config['base_url'] = 'http://localhost/ems_sa_test/';
 /*if(strpos($_SERVER['HTTP_HOST'],'www')===false)
 {
     $config['base_url'] = 'http://ems.malikseeds.com/';
